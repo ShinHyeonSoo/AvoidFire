@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dataManager: {fileID: 0}
+  _effectManager: {fileID: 0}
 --- !u!114 &680456056
 MonoBehaviour:
   m_ObjectHideFlags: 0
