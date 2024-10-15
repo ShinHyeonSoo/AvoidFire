@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class TestFire : MonoBehaviour
 {
     [SerializeField] private float fallSpeed = 5f;
 
@@ -23,7 +23,7 @@ public class Fire : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Ãæµ¹´ë»ó ÇØ½¬°ª °¡Á®¿À°í
+        // ì¶©ëŒëŒ€ìƒ í•´ì‰¬ê°’ ê°€ì ¸ì˜¤ê³ 
         int collisionTagHash = collision.gameObject.GetHashCode();
 
         if (collisionTagHash == groundTagHash)
@@ -32,7 +32,7 @@ public class Fire : MonoBehaviour
         }
         else if (collisionTagHash == playerTagHash)
         {
-            //TODO :: ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö ¹× ¿ÀºêÁ§Æ® ÆÄ±«,
+            //TODO :: í”Œë ˆì´ì–´ ë°ë¯¸ì§€ ë° ì˜¤ë¸Œì íŠ¸ íŒŒê´´,
         }
     }
 }
