@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class TestFire : MonoBehaviour
 {
     public GameObject fireobj;
     float size;
