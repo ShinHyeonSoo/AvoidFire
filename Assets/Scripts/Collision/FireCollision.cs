@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collision : MonoBehaviour
+public class FireCollision : MonoBehaviour
 {   
     // 충돌이 필요한 객체: 플레이어와 불
     // 충돌이 일어났을 경우: 플레이어의 하트 감소
@@ -28,6 +28,16 @@ public class Collision : MonoBehaviour
             {
                 Die();
             }
+        }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(this.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
         }
 
         void Die()
