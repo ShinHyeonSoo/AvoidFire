@@ -24,7 +24,7 @@ public class TestFire : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // 충돌대상 해쉬값 가져오고
-        int collisionTagHash = collision.gameObject.GetHashCode();
+        int collisionTagHash = collision.gameObject.tag.GetHashCode();
 
         if (collisionTagHash == groundTagHash)
         {
@@ -32,7 +32,12 @@ public class TestFire : MonoBehaviour
         }
         else if (collisionTagHash == playerTagHash)
         {
-            //TODO :: 플레이어 데미지 및 오브젝트 파괴,
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.TakeDamage();
+            }
+            Destroy(gameObject);
         }
     }
 }
