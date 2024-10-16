@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 5;
+    Player player;
     private int currentHealth;
     private HealthUIManager healthUIManager;
 
+    AvoidFireAnimationController controller;
+
+    private void Awake()
+    {
+        player = GetComponent<Player>();
+        controller = GetComponent<AvoidFireAnimationController>();
+    }
+
     private void Start()
     {
-        // TODO : 하트 개수 변경 (예림)
-        currentHealth = maxHealth;
+        // TODO : 하트 개수 변경 (예림) - 완료
+        currentHealth = player.HP;
         healthUIManager = FindObjectOfType<HealthUIManager>();
         healthUIManager.InitializeHealthUI(currentHealth);
     }
@@ -25,10 +33,12 @@ public class PlayerController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            controller.DeadAnim();
             GameOver();
         }
 
-        // TODO : 플레이어 피격 (예림)
+        controller.HitAnim();
+        // TODO : 플레이어 피격 (예림) - 완료 + 죽는 모션
     }
 
     private void GameOver()

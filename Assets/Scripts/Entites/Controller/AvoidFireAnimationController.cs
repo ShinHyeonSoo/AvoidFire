@@ -37,11 +37,11 @@ public class AvoidFireAnimationController : AnimationController
         animator.SetBool(isJump, obj);
     }
 
-    private void HitAnim()
+    public void HitAnim()
     {
         animator.SetBool(isHit, true);
     }
-    private void DeadAnim()
+    public void DeadAnim()
     {
         animator.SetBool(isDead, true);
     }
