@@ -1,35 +1,78 @@
-
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
-    public GameObject fireobj;
-    float size;
+    [System.Serializable]
+    public class Pool
+    {
+        public string fireobj;
+        public GameObject fireobjPrefab;
+        public int count;
+    }
+
+    public List<Pool> pools;
+    public Dictionary<string, Queue<GameObject>> PoolDictionary;
+
     Rigidbody2D rb2D;
+    float size;
 
     // Start is called before the first frame update
+
+    // Update is called once per frame
+    void Awake()
+    {
+
+        PoolDictionary = new Dictionary<string, Queue<GameObject>>();
+        //FindObjectOfType<Fire>();
+
+        foreach (var pool in pools)
+        {
+            Queue<GameObject> objectPool = new Queue<GameObject>();
+            for (int i = 0; i < pool.count; i++)
+            {
+
+                GameObject obj = Instantiate(pool.fireobjPrefab);
+                obj.SetActive(false);
+                objectPool.Enqueue(obj);
+            }
+
+            PoolDictionary.Add(pool.fireobj, objectPool);
+        }
+    }
+
+    public GameObject SpawnFromPool(string fireobj)
+    {
+        if (!PoolDictionary.ContainsKey(fireobj))
+        {
+            return null;
+        }
+
+        GameObject obj = PoolDictionary[fireobj].Dequeue();
+        PoolDictionary[fireobj].Enqueue(obj);
+
+        obj.SetActive(true);
+        return obj;
+    }
+
     void Start()
     {
         Debug.Log("Start 함수 실행");
         Spawnfire();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Setfire()
     {
+        GameObject fire = SpawnFromPool("fire");
 
-        GameObject fire = Instantiate(fireobj, this.transform);
+        if (fire != null)
+        {
+            float x = Random.Range(-9f, 9f);
+            fire.transform.localPosition = new Vector2(x, 5);
+        }
+
+
         rb2D = fire.GetComponent<Rigidbody2D>();
-
-        float x = Random.Range(-9f, 9f);
-        fire.transform.localPosition = new Vector2(x, 5);
 
         int Randomtype = Random.Range(1, 4);
 
@@ -55,6 +98,4 @@ public class Fire : MonoBehaviour
     {
         InvokeRepeating("Setfire", 0f, .3f);
     }
-
-
 }
