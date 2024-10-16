@@ -5,21 +5,24 @@ using UnityEngine;
 
 public class AvoidFireMovement : MonoBehaviour
 {
-    private AvoidFireController movementController;
+    private AvoidFireController controller;
     private Rigidbody2D movementRigidbody;
     private Player player;
+    private SpriteRenderer spriteRenderer;
 
     private Vector2 movementDirection = Vector2.zero;
-    private bool isGrounded = true;
+    public bool isGrounded = true;
+    private bool isFacingRight = true;
 
     private void Awake()
     {
-        movementController = GetComponent<AvoidFireController>();
+        controller = GetComponent<AvoidFireController>();
         movementRigidbody = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        movementController.OnMoveEvent += Move;
-        movementController.OnJumpEvent += Jump;
+        controller.OnMoveEvent += Move;
+        controller.OnJumpEvent += Jump;
     }
 
     void Start()
@@ -47,7 +50,7 @@ public class AvoidFireMovement : MonoBehaviour
         if (isGrounded && isJump)
         {
             // TODO : 점프 높이 테스트 해서 결정
-            movementRigidbody.AddForce(new Vector2(0, 300f)); // 점프 힘 설정
+            movementRigidbody.AddForce(new Vector2(0, 1000f)); // 점프 힘 설정
             isGrounded = false; // 점프 후에는 공중 상태로 설정
         }
     }
@@ -57,6 +60,8 @@ public class AvoidFireMovement : MonoBehaviour
         direction = direction * 10f;
 
         movementRigidbody.velocity = direction;
+
+        Flip(direction);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -66,5 +71,13 @@ public class AvoidFireMovement : MonoBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    private void Flip(Vector2 direction)
+    {
+        if (direction.x >= 0)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
     }
 }

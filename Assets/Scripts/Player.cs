@@ -5,14 +5,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float playerSpeed;
-    public int HP;
 
     public RuntimeAnimatorController[] animatorControllers;
-    public Animator animator;
+    public AnimationController animationController;
+
+
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animationController.animator = GetComponent<Animator>();
         // TODO : 추후 수정 각캐릭에 맞는 스탯을 받아오도록
     }
 
