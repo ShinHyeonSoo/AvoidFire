@@ -10,14 +10,17 @@ public class Player : MonoBehaviour
     public RuntimeAnimatorController[] animatorControllers;
     public AnimationController animationController;
 
-    public float speed = 7f;
-    public float jumpPower = 1000f;
-    public int HP = 3;
+    public float speed;
+    public float jumpPower;
+    public int HP;
 
     private void Awake()
     {
         GameManager = GetComponent<GameManager>();
-    }
+        speed = 7f;
+        jumpPower = 1000f;
+        HP = 3;
+}
 
     void Start()
     {

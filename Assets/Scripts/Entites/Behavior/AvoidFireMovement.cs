@@ -56,9 +56,10 @@ public class AvoidFireMovement : MonoBehaviour
 
     private void ApplyMovement(Vector2 direction)
     {
-        direction = direction * player.speed;
+        Vector2 velocity = movementRigidbody.velocity;
+        velocity.x = direction.x * player.speed;
 
-        movementRigidbody.velocity = direction;
+        movementRigidbody.velocity = velocity;
 
         Flip(direction);
     }

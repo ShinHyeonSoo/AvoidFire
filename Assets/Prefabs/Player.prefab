@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7914419074853740353}
   - component: {fileID: 6943119036063873236}
   - component: {fileID: 8559663599433414936}
+  - component: {fileID: 1625728152017371086}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -108,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 7
+  m_GravityScale: 8.9
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -231,9 +232,9 @@ MonoBehaviour:
   GameManager: {fileID: 0}
   animatorControllers: []
   animationController: {fileID: 0}
-  speed: 7
-  jumpPower: 1000
-  HP: 3
+  speed: 0
+  jumpPower: 0
+  HP: 0
 --- !u!114 &8356820640791947365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,3 +285,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7910089250287553471}
+--- !u!114 &1625728152017371086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2481720723541906786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e1a93602e582e488e7ec633407636c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
