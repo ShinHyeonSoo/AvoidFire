@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 3285282285577425574}
   - component: {fileID: 62586905486132278}
   - component: {fileID: 7910089250287553471}
+  - component: {fileID: 6994770595218403391}
   - component: {fileID: 8356820640791947365}
   - component: {fileID: 7914419074853740353}
   - component: {fileID: 6943119036063873236}
-  - component: {fileID: 6994770595218403391}
+  - component: {fileID: 8559663599433414936}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1568079989, guid: 99a24620d31e5ce4e823c32d11e17c2c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,7 +90,7 @@ SpriteRenderer:
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &6867885310230264370
@@ -107,7 +108,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 7
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -204,7 +205,7 @@ Animator:
   m_GameObject: {fileID: 2481720723541906786}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8f15609664438724f81efb5970d50e71, type: 2}
+  m_Controller: {fileID: 9100000, guid: 904ffb6150438de4f9829291dfbaf83b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -215,6 +216,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6994770595218403391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2481720723541906786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f238d02a386c6418d9251b5487c2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  animatorControllers: []
+  animationController: {fileID: 0}
+  speed: 7
+  jumpPower: 1000
+  HP: 3
 --- !u!114 &8356820640791947365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074390826a0144e4484d34f700e6ea79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrounded: 1
 --- !u!114 &6943119036063873236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec8640d529a11b948b20a45868e816da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6994770595218403391
+--- !u!114 &8559663599433414936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,10 +280,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2481720723541906786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13f238d02a386c6418d9251b5487c2ed, type: 3}
+  m_Script: {fileID: 11500000, guid: dc915510c5f3b964ebb18133f6a17525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 0
-  HP: 0
-  animatorControllers: []
-  animator: {fileID: 0}
+  animator: {fileID: 7910089250287553471}
