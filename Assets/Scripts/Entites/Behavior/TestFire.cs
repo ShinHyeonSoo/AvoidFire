@@ -28,6 +28,7 @@ public class TestFire : MonoBehaviour
 
         if (collisionTagHash == groundTagHash)
         {
+            // TODO : 땅과 불 충돌
             Destroy(gameObject);
         }
         else if (collisionTagHash == playerTagHash)
@@ -39,5 +40,7 @@ public class TestFire : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        // TODO : 이펙트 생성
     }
 }

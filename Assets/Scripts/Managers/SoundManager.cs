@@ -61,8 +61,8 @@ public class SoundManager : MonoBehaviour
             go.transform.parent = transform;
         }
 
-        BgmVolume = 0.5f;
-        SfxVolume = 0.5f;
+        BgmVolume = 0.3f;
+        SfxVolume = 0.3f;
         _audioSources[(int)Sound.Bgm].loop = true; // bgm 재생기는 무한 반복 재생
 
         LoadSounds();

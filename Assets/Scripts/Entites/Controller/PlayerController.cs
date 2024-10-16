@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        // TODO : 하트 개수 변경 (예림)
         currentHealth = maxHealth;
         healthUIManager = FindObjectOfType<HealthUIManager>();
         healthUIManager.InitializeHealthUI(currentHealth);
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
         {
             GameOver();
         }
+
+        // TODO : 플레이어 피격 (예림)
     }
 
     private void GameOver()
