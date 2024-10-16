@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,13 +16,13 @@ public class AvoidFireController : MonoBehaviour
 
     public void CallMoveEvent(Vector2 direction)
     {
-        // A D ÁÂ¿ì ÀÌµ¿
+        // A D ì¢Œìš° ì´ë™
         OnMoveEvent?.Invoke(direction);
     }
 
     public void CallLookEvent(bool isJump)
     {
-        // ½ºÆäÀÌ½º Á¡ÇÁ
+        // ìŠ¤í˜ì´ìŠ¤ ì í”„
         OnJumpEvent?.Invoke(isJump);
     }
 }

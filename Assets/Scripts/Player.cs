@@ -1,30 +1,57 @@
+ï»¿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{
-    public float playerSpeed;
-    public int HP;
+{ 
+    public GameManager GameManager;
 
     public RuntimeAnimatorController[] animatorControllers;
-    public Animator animator;
+    public AnimationController animationController;
+
+    public float speed = 7f;
+    public float jumpPower = 1000f;
+    public int HP = 3;
+
+    private void Awake()
+    {
+        GameManager = GetComponent<GameManager>();
+    }
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        // TODO : ÃßÈÄ ¼öÁ¤ °¢Ä³¸¯¿¡ ¸Â´Â ½ºÅÈÀ» ¹Ş¾Æ¿Àµµ·Ï
+        //animationController.animator = GetComponent<Animator>();
+        // TODO : ì¶”í›„ ìˆ˜ì • ê°ìºë¦­ì— ë§ëŠ” ìŠ¤íƒ¯ì„ ë°›ì•„ì˜¤ë„ë¡
     }
 
     private void OnEnable()
     {
-        // ÇÃ·¹ÀÌÀÌ¾î ¾ÆÀÌµğ(Ä³¸¯ÅÍÅ¸ÀÔ)¿¡µû¶ó ¾Ö´Ï¸ŞÀÌÅÍ ¼±ÅÃÇÏ´Â ÄÚµå
+        // í”Œë ˆì´ì´ì–´ ì•„ì´ë””(ìºë¦­í„°íƒ€ì…)ì—ë”°ë¼ ì• ë‹ˆë©”ì´í„° ì„ íƒí•˜ëŠ” ì½”ë“œ
         // animator.runtimeAnimatorController = animatorControllers[GameManager.instance.playerId];
+
+        // SetPlayer(GameManager.instance.playerId);
     }
 
     public void ChangeAnimController()
     {
         // animator.runtimeAnimatorController = animatorControllers[GameManager.instance.playerId];
-        // ¾Ö´Ï¸ŞÀÌÅÍ ÄÁÆ®·Ñ·¯¸¦ ÇöÀç ¼±ÅÃµÈ playerId¿¡ ¸Â´Â °É·Î ¹Ù²Ş
+        // ì• ë‹ˆë©”ì´í„° ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ í˜„ì¬ ì„ íƒëœ playerIdì— ë§ëŠ” ê±¸ë¡œ ë°”ê¿ˆ
+    }
+
+    private void SetPlayer(int playerID)
+    {
+        if (playerID == 0)
+        {
+            speed = 7f;
+            jumpPower = 1000f;
+            HP = 4;
+        }
+        if (playerID == 0)
+        {
+            speed = 10f;
+            jumpPower = 1100f;
+            HP = 3;
+        }
     }
 }

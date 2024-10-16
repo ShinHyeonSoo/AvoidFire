@@ -1,44 +1,46 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AvoidFireMovement : MonoBehaviour
 {
-    private AvoidFireController movementController;
+    private AvoidFireController controller;
     private Rigidbody2D movementRigidbody;
     private Player player;
+    private SpriteRenderer spriteRenderer;
 
     private Vector2 movementDirection = Vector2.zero;
-    private bool isGrounded = true;
+    public bool isGrounded = true;
 
     private void Awake()
     {
-        movementController = GetComponent<AvoidFireController>();
+        controller = GetComponent<AvoidFireController>();
         movementRigidbody = GetComponent<Rigidbody2D>();
-        player = GetComponent<Player>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        movementController.OnMoveEvent += Move;
-        movementController.OnJumpEvent += Jump;
+        controller.OnMoveEvent += Move;
+        controller.OnJumpEvent += Jump;
     }
 
     void Start()
     {
+        player = GetComponent<Player>();
     }
 
     private void FixedUpdate()
     {
-        // ¹°¸® ¾÷µ¥ÀÌÆ®¿¡¼­ ¿òÁ÷ÀÓ Àû¿ë
-        // FixedUpdate´Â ¹°¸®¾÷µ¥ÀÌÆ® °ü·Ã
-        // rigidebodyÀÇ °ªÀ» ¹Ù²Ù´Ï±î FixedUpdate
+        // ë¬¼ë¦¬ ì—…ë°ì´íŠ¸ì—ì„œ ì›€ì§ìž„ ì ìš©
+        // FixedUpdateëŠ” ë¬¼ë¦¬ì—…ë°ì´íŠ¸ ê´€ë ¨
+        // rigidebodyì˜ ê°’ì„ ë°”ê¾¸ë‹ˆê¹Œ FixedUpdate
         ApplyMovement(movementDirection);
 
     }
 
     private void Move(Vector2 direction)
     {
-        // ÀÌµ¿¹æÇâ¸¸ Á¤ÇØµÎ°í ½ÇÁ¦·Î ¿òÁ÷ÀÌÁö´Â ¾ÊÀ½.
-        // ¿òÁ÷ÀÌ´Â °ÍÀº ¹°¸® ¾÷µ¥ÀÌÆ®¿¡¼­ ÁøÇà(rigidbody°¡ ¹°¸®´Ï±î)
+        // ì´ë™ë°©í–¥ë§Œ ì •í•´ë‘ê³  ì‹¤ì œë¡œ ì›€ì§ì´ì§€ëŠ” ì•ŠìŒ.
+        // ì›€ì§ì´ëŠ” ê²ƒì€ ë¬¼ë¦¬ ì—…ë°ì´íŠ¸ì—ì„œ ì§„í–‰(rigidbodyê°€ ë¬¼ë¦¬ë‹ˆê¹Œ)
         movementDirection = direction;
     }
 
@@ -46,25 +48,34 @@ public class AvoidFireMovement : MonoBehaviour
     {
         if (isGrounded && isJump)
         {
-            // TODO : Á¡ÇÁ ³ôÀÌ Å×½ºÆ® ÇØ¼­ °áÁ¤
-            movementRigidbody.AddForce(new Vector2(0, 300f)); // Á¡ÇÁ Èû ¼³Á¤
-            isGrounded = false; // Á¡ÇÁ ÈÄ¿¡´Â °øÁß »óÅÂ·Î ¼³Á¤
+            // TODO : ì í”„ ë†’ì´ í…ŒìŠ¤íŠ¸ í•´ì„œ ê²°ì •
+            movementRigidbody.AddForce(new Vector2(0, player.jumpPower)); // ì í”„ íž˜ ì„¤ì •
+            isGrounded = false; // ì í”„ í›„ì—ëŠ” ê³µì¤‘ ìƒíƒœë¡œ ì„¤ì •
         }
     }
 
     private void ApplyMovement(Vector2 direction)
     {
-        direction = direction * 10f;
+        direction = direction * player.speed;
 
         movementRigidbody.velocity = direction;
+
+        Flip(direction);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // ¶¥¿¡ ´ê¾ÒÀ» ¶§ isGrounded¸¦ true·Î ¼³Á¤
-        if (collision.gameObject.CompareTag("Ground")) // Ground¶ó´Â ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®¿¡ ´êÀ¸¸é
+        // ë•…ì— ë‹¿ì•˜ì„ ë•Œ isGroundedë¥¼ trueë¡œ ì„¤ì •
+        if (collision.gameObject.CompareTag("Ground")) // Groundë¼ëŠ” íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ì— ë‹¿ìœ¼ë©´
         {
             isGrounded = true;
         }
+    }
+    private void Flip(Vector2 direction)
+    {
+        if (direction.x > 0)
+            spriteRenderer.flipX = false;
+        else if(direction.x < 0)
+            spriteRenderer.flipX = true;
     }
 }
