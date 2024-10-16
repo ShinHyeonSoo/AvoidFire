@@ -23,6 +23,6 @@ public class PlayerController : MonoBehaviour
     private void GameOver()
     {
         isGameOver = true;
-        AvoidFireGameManager.Instance.GameOver();
+        GameManager.Instance.GameOver();
     }
 }
