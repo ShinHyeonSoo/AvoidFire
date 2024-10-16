@@ -73,9 +73,9 @@ public class AvoidFireMovement : MonoBehaviour
     }
     private void Flip(Vector2 direction)
     {
-        if (direction.x >= 0)
+        if (direction.x > 0)
             spriteRenderer.flipX = false;
-        else
+        else if(direction.x < 0)
             spriteRenderer.flipX = true;
     }
 }
