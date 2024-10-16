@@ -1,17 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
 public class TweenPopup : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // .SetUpdate(true) -> TimeScale 이 0 이여도 실행
     void Start()
     {
         DOTween.Init();
         transform.localScale = Vector3.one * 0.1f;
-
-        gameObject.SetActive(false);
     }
 
     public void Show()
@@ -23,7 +21,7 @@ public class TweenPopup : MonoBehaviour
         seq.Append(transform.DOScale(1.1f, 0.2f));
         seq.Append(transform.DOScale(1f, 0.1f));
 
-        seq.Play();
+        seq.Play().SetUpdate(true);
     }
 
     public void Hide()
@@ -33,9 +31,9 @@ public class TweenPopup : MonoBehaviour
         seq.Append(transform.DOScale(1.1f, 0.1f));
         seq.Append(transform.DOScale(0.05f, 0.2f));
 
-        seq.Play().OnComplete(() => 
-        { 
-            gameObject.SetActive(false); 
+        seq.Play().SetUpdate(true).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
         });
     }
 }
