@@ -5,13 +5,20 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Text")]
     [SerializeField] private Text scoreText;
+    [Header("Panel")]
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject pausePanel;
+
+    private TweenButton tweenButton;
 
     private void Start()
     {
+        tweenButton = GetComponent<TweenButton>();
         gameOverPanel.SetActive(false);
-        UpdateScore(0);
+        pausePanel.SetActive(false);
+        //UpdateScore(0);
     }
 
     public void UpdateScore(int score)
@@ -21,6 +28,23 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOver()
     {
-        gameOverPanel.SetActive(true);
+        tweenButton.OnButtonOpen(gameOverPanel);
+    }
+
+    public void PasueGame()
+    {
+        Time.timeScale = 0f;
+        tweenButton.OnButtonOpen(pausePanel);
+    }
+
+    public void ResumeGame()
+    {
+        StartCoroutine(CoroutineResume());
+    }
+
+    IEnumerator CoroutineResume()
+    {
+        yield return new WaitUntil(() => !pausePanel.activeSelf);
+        Time.timeScale = 1f;
     }
 }
