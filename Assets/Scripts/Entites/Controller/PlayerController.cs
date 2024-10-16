@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private int life = 5;
-    private bool isGameOver = false;
+    [SerializeField] private int maxHealth = 5;
+    private int currentHealth;
+    private HealthUIManager healthUIManager;
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+        healthUIManager = FindObjectOfType<HealthUIManager>();
+        healthUIManager.InitializeHealthUI(currentHealth);
+    }
 
     public void TakeDamage()
     {
-        if (isGameOver) return;
+        if (currentHealth <= 0) return;//중복방지
 
-        life--;
-        Debug.Log("Player Life: " + life);
+        currentHealth--;
+        healthUIManager.UpdateHealthUI(currentHealth);
 
-        if (life <= 0)
+        if (currentHealth <= 0)
         {
             GameOver();
         }
@@ -22,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
-        isGameOver = true;
         GameManager.Instance.GameOver();
     }
 }
