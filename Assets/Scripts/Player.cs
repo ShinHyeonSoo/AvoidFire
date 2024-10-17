@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
 
     private void SetPlayer(int playerID)
     {
-
         _name = PlayerInformManager.instance.playerName;
         if (playerID == 0)
         {
@@ -54,7 +53,6 @@ public class Player : MonoBehaviour
             jumpPower = 10f;
             HP = 3;
         }
-
 
         animator.runtimeAnimatorController = animatorControllers[PlayerInformManager.instance.playerId];
     }
