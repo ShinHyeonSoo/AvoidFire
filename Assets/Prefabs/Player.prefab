@@ -219,9 +219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f238d02a386c6418d9251b5487c2ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
-  animatorControllers: []
-  animationController: {fileID: 0}
+  animatorControllers:
+  - {fileID: 9100000, guid: 904ffb6150438de4f9829291dfbaf83b, type: 2}
+  - {fileID: 9100000, guid: 5542742b0a451f844922682b513fddac, type: 2}
+  animator: {fileID: 0}
+  _name: 
   speed: 0
   jumpPower: 0
   HP: 0

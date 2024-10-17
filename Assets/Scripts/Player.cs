@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public RuntimeAnimatorController[] animatorControllers;
-    public AnimationController animationController;
+    public Animator animator;
 
     public string _name;
     public float speed;
@@ -16,9 +15,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(PlayerInformManager.instance.playerName);
-        animationController.animator = GetComponent<Animator>();
-        // TODO : 추후 수정 각캐릭에 맞는 스탯을 받아오도록
+        animator = GetComponent<Animator>();
         SetPlayer(PlayerInformManager.instance.playerId);
     }
 
@@ -38,7 +35,6 @@ public class Player : MonoBehaviour
 
     private void SetPlayer(int playerID)
     {
-        Debug.Log("test");
         _name = PlayerInformManager.instance.playerName;
         if (playerID == 0)
         {
@@ -53,6 +49,6 @@ public class Player : MonoBehaviour
             HP = 3;
         }
 
-        animationController.animator.runtimeAnimatorController = animatorControllers[PlayerInformManager.instance.playerId];
+        animator.runtimeAnimatorController = animatorControllers[PlayerInformManager.instance.playerId];
     }
 }

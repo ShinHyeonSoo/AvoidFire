@@ -16,7 +16,7 @@ public class PlayerInformManager : MonoBehaviour
     {
         if (instance != null) Destroy(gameObject);
         instance = this;
-        playerId = 0;
+        playerId = -1;
     }
 
     private void Start()
