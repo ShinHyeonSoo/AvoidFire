@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Player player;
-    private int currentHealth;
-    private HealthUIManager healthUIManager;
 
+    private int currentHealth;
+    private bool isActiveShield = false;
+
+    private HealthUIManager healthUIManager;
+    private SpriteRenderer _spriteRenderer;
     AvoidFireAnimationController controller;
 
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         player = GetComponent<Player>();
         controller = GetComponent<AvoidFireAnimationController>();
     }
@@ -26,15 +30,16 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (currentHealth <= 0) return;//중복방지
-
-        currentHealth--;
-        healthUIManager.UpdateHealthUI(currentHealth);
-
         if (currentHealth <= 0)
         {
             controller.DeadAnim();
             GameOver();
+        }
+
+        if (isActiveShield == false)
+        {
+            currentHealth--;
+            healthUIManager.UpdateHealthUI(currentHealth);
         }
 
         controller.HitAnim();
@@ -44,15 +49,11 @@ public class PlayerController : MonoBehaviour
     public void TakeHeal()
     {
         currentHealth++;
+        healthUIManager.UpdateHealthUI(currentHealth);
     }
 
     private void GameOver()
     {
         GameManager.Instance.GameOver();
-    }
-
-    public void ActivateShield(int index)
-    {
-
     }
 }

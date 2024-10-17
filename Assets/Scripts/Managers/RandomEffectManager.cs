@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomEffectManager : MonoBehaviour
@@ -6,10 +7,20 @@ public class RandomEffectManager : MonoBehaviour
     private Player player;
     private PlayerController controller;
 
+    private string originalPlayerTag;
+
+    [SerializeField] private float magnetRadius = 10f;
+    [SerializeField] private float magnetPullForce = 30f;
+
     private void Awake()
     {
-        player= GetComponent<Player>();
-        controller = GetComponent<PlayerController>();
+        GameObject playerObject = GameObject.Find("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.GetComponent<Player>();
+            controller = playerObject.GetComponent<PlayerController>();
+            originalPlayerTag = playerObject.tag;
+        }
     }
 
     public void ApplyRandomEffect()
@@ -22,7 +33,7 @@ public class RandomEffectManager : MonoBehaviour
                 StartCoroutine(ApplyTimeSlowAndSpeedUp());
                 break;
             case 2:
-                ApplyShield();
+                StartCoroutine(ActivateMagnet(15f));
                 break;
             case 3:
                 IncreasePlayerHealth();
@@ -41,13 +52,35 @@ public class RandomEffectManager : MonoBehaviour
         player.speed /= 1.5f;
     }
 
-    private void ApplyShield()
-    {
-        controller.ActivateShield(10f);
-    }
-
     private void IncreasePlayerHealth()
     {
         controller.TakeHeal();
     }
+
+    private IEnumerator ActivateMagnet(float duration)
+    {
+        player.gameObject.tag = "Ground";
+
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < duration)
+        {
+            Collider2D[] fireObjects = Physics2D.OverlapCircleAll(player.transform.position, magnetRadius);
+
+            foreach (Collider2D fireObject in fireObjects)
+            {
+                if (fireObject.CompareTag("Fire"))
+                {
+                    Vector2 directionToPlayer = (player.transform.position - fireObject.transform.position).normalized;
+                    fireObject.GetComponent<Rigidbody2D>().AddForce(directionToPlayer * magnetPullForce);
+                }
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        player.gameObject.tag = originalPlayerTag;
+    }
+
 }

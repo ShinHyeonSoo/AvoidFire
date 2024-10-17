@@ -1,9 +1,10 @@
 using UnityEngine;
+using TMPro;
 
 public class RandomBoxInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject openBoxPrefab;
-    [SerializeField] private GameObject pressGMessage;
+    [SerializeField] private TextMeshProUGUI pressGMessage;
     private RandomEffectManager effectManager;
 
     private bool _isPlayerNearby = false;
@@ -11,7 +12,8 @@ public class RandomBoxInteraction : MonoBehaviour
 
     private void Awake()
     {
-        RandomEffectManager effectManager = GetComponent<RandomEffectManager>();
+        pressGMessage = GameObject.Find("ScoreCanvas").transform.Find("RandomBoxInteractionText").GetComponent<TextMeshProUGUI>();
+        effectManager = FindObjectOfType<RandomEffectManager>();  // RandomEffectManager를 씬에서 찾음
     }
 
     private void Update()
@@ -29,7 +31,11 @@ public class RandomBoxInteraction : MonoBehaviour
             _currentBox.SetActive(false);
             GameObject openBox = Instantiate(openBoxPrefab, _currentBox.transform.position, Quaternion.identity);
 
+            // 랜덤 효과 적용
             effectManager.ApplyRandomEffect();
+
+            Destroy(openBox, 3f);
+            Destroy(_currentBox, 3f);
         }
     }
 
@@ -38,7 +44,7 @@ public class RandomBoxInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _isPlayerNearby = true;
-            pressGMessage.SetActive(true);
+            pressGMessage.gameObject.SetActive(true);
         }
     }
 
@@ -47,7 +53,7 @@ public class RandomBoxInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _isPlayerNearby = false;
-            pressGMessage.SetActive(false);
+            pressGMessage.gameObject.SetActive(false);
         }
     }
 
