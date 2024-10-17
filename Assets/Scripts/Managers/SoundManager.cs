@@ -108,7 +108,7 @@ public class SoundManager : MonoBehaviour
         _audioClipDic.Clear();
     }
 
-    public void Play(AudioClip audioClip, Sound type)
+    public void Play(AudioClip audioClip, Sound type, float volume = 1f)
     {
         if (audioClip == null)
             return;
@@ -119,19 +119,19 @@ public class SoundManager : MonoBehaviour
             if (audioSource.isPlaying)
                 audioSource.Stop();
 
-            audioSource.volume = BgmVolume;
+            audioSource.volume = BgmVolume * volume;
             audioSource.clip = audioClip;
             audioSource.Play();
         }
         else // Sfx 효과음 재생
         {
             AudioSource audioSource = _audioSources[(int)Sound.Sfx];
-            audioSource.volume = SfxVolume;
+            audioSource.volume = SfxVolume * volume;
             audioSource.PlayOneShot(audioClip);
         }
     }
 
-    public void Play(string audioName, Sound type)
+    public void Play(string audioName, Sound type, float volume = 1f)
     {
         if (_audioClipDic[audioName] == null)
             return;
@@ -142,14 +142,14 @@ public class SoundManager : MonoBehaviour
             if (audioSource.isPlaying)
                 audioSource.Stop();
 
-            audioSource.volume = BgmVolume;
+            audioSource.volume = BgmVolume * volume;
             audioSource.clip = _audioClipDic[audioName];
             audioSource.Play();
         }
         else // Sfx 효과음 재생
         {
             AudioSource audioSource = _audioSources[(int)Sound.Sfx];
-            audioSource.volume = SfxVolume;
+            audioSource.volume = SfxVolume * volume;
             audioSource.PlayOneShot(_audioClipDic[audioName]);
         }
     }
@@ -159,7 +159,7 @@ public class SoundManager : MonoBehaviour
         return _audioClipDic[name];
     }
 
-    public void TestPlaySFX(string name)
+    public void PlaySFX(string name)
     {
         AudioSource audioSource = _audioSources[(int)Sound.Sfx];
         audioSource.volume = SfxVolume;
