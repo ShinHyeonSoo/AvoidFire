@@ -14,7 +14,7 @@ public class FireSpawner : MonoBehaviour
 
     Rigidbody2D rb2D;
 
-    private TestFire testFire;
+    private FireProjectile fire;
 
     private void Start()
     {
@@ -74,18 +74,18 @@ public class FireSpawner : MonoBehaviour
         if (score >= 200)
         {
             spawnInterval = 0.2f;
-            testFire.FallSpeed = 7f;
+            fire.FallSpeed = 7f;
             rb2D.gravityScale = 2f;
         }
         if (score >= 300)
         {
             spawnInterval = 0.15f;
-            testFire.FallSpeed = 9f;
+            fire.FallSpeed = 9f;
         }
         if (score >= 500)
         {
             spawnInterval = 0.1f;
-            testFire.FallSpeed = 12f;
+            fire.FallSpeed = 12f;
             rb2D.gravityScale = 3f;
         }
     }
