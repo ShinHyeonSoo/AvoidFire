@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     // 점수판이 있어야 할 곳 : 인 게임 씬, 점수 씬
-
+    public static Score Instance;
     public Text totalScoreTxt;
 
     int totalScore;

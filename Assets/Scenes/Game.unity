@@ -822,7 +822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8076814714082155278, guid: 858aeda0ebedc7e4b8e82aa1f8ccfdda, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 500
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -846,7 +846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e1a93602e582e488e7ec633407636c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
 --- !u!1 &980699929
 GameObject:
   m_ObjectHideFlags: 0
