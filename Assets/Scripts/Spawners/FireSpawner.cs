@@ -18,7 +18,6 @@ public class FireSpawner : MonoBehaviour
 
     private void Start()
     {
-        rb2D.gravityScale = 1f; // ม฿ทย
         StartCoroutine(SpawnFire());
     }
 
@@ -39,7 +38,7 @@ public class FireSpawner : MonoBehaviour
 
     public void SetFire()
     {
-        GameObject fire = Instantiate(firePrefab, spawnPoint.position, Quaternion.identity);
+        GameObject fire = Instantiate(firePrefab, spawnPoint.position, Quaternion.Euler(0, 0, 180));
         Rigidbody2D rb2D = fire.GetComponent<Rigidbody2D>();
         float randomXPosition = Random.Range(spawnXMin, spawnXMax);
         fire.transform.position = new Vector2(randomXPosition, spawnPoint.position.y);
