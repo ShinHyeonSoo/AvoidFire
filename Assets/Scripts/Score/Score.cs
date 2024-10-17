@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    // 점수판이 있어야 할 곳 : 인 게임 씬, 점수 씬
-
+    public static Score Instance;
     public Text totalScoreTxt;
 
     int totalScore;
@@ -15,6 +14,16 @@ public class Score : MonoBehaviour
     {
         totalScore += score;
         totalScoreTxt.text = totalScore.ToString();
-        Debug.Log(totalScore);
+    }
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // 이미 인스턴스가 있다면 새로운 인스턴스를 파괴
+        }
     }
 }
