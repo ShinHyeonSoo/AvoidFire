@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
     [Header("Text")]
     [SerializeField] private Text scoreText;
     [Header("Panel")]
@@ -12,6 +14,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
 
     private TweenButton tweenButton;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
