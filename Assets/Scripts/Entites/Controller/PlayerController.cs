@@ -5,13 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Player player;
-    private int currentHealth;
-    private HealthUIManager healthUIManager;
 
+    private int currentHealth;
+    private int maxHealth;
+    private bool isActiveShield = false;
+
+    private HealthUIManager healthUIManager;
+    private SpriteRenderer _spriteRenderer;
     AvoidFireAnimationController controller;
 
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         player = GetComponent<Player>();
         controller = GetComponent<AvoidFireAnimationController>();
     }
@@ -20,25 +25,40 @@ public class PlayerController : MonoBehaviour
     {
         // TODO : 하트 개수 변경 (예림) - 완료
         currentHealth = player.HP;
+        maxHealth = currentHealth;
         healthUIManager = FindObjectOfType<HealthUIManager>();
         healthUIManager.InitializeHealthUI(currentHealth);
     }
 
     public void TakeDamage()
     {
-        if (currentHealth <= 0) return;//중복방지
-
-        currentHealth--;
-        healthUIManager.UpdateHealthUI(currentHealth);
-
         if (currentHealth <= 0)
         {
             controller.DeadAnim();
             GameOver();
         }
 
+        if (isActiveShield == false)
+        {
+            currentHealth--;
+            healthUIManager.UpdateHealthUI(currentHealth);
+        }
+
         controller.HitAnim();
         // TODO : 플레이어 피격 (예림) - 완료 + 죽는 모션
+    }
+
+    public void TakeHeal()
+    {
+        currentHealth++;
+        //UI업데이트
+        if (currentHealth > maxHealth)
+        {
+            maxHealth = currentHealth;
+            healthUIManager.AddHeart();
+        }
+
+        healthUIManager.UpdateHealthUI(currentHealth);
     }
 
     private void GameOver()
