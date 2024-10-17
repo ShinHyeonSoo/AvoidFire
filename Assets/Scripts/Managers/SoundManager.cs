@@ -60,9 +60,7 @@ public class SoundManager : MonoBehaviour
             _audioSources[i] = go.AddComponent<AudioSource>();
             go.transform.parent = transform;
         }
-
-        BgmVolume = 0.3f;
-        SfxVolume = 0.3f;
+        InitVolume(0.3f, 0.3f);
         _audioSources[(int)Sound.Bgm].loop = true; // bgm 재생기는 무한 반복 재생
 
         LoadSounds();
@@ -175,5 +173,13 @@ public class SoundManager : MonoBehaviour
 
         _audioSources[(int)Sound.Bgm].volume = BgmVolume;
         _audioSources[(int)Sound.Sfx].volume = SfxVolume;
+    }
+
+    public void InitVolume(float bgm, float sfx)
+    {
+        BgmVolume = bgm;
+        _sliderBgm.value = BgmVolume;
+        SfxVolume = sfx;
+        _sliderSfx.value = SfxVolume;
     }
 }
