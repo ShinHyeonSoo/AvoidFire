@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 811085026113684886}
   - component: {fileID: 1918828647753553401}
   - component: {fileID: 1845198738713925994}
-  - component: {fileID: -825936981123972495}
+  - component: {fileID: -5583766264534935246}
   m_Layer: 0
   m_Name: fire
   m_TagString: Fire
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-825936981123972495
+--- !u!114 &-5583766264534935246
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
