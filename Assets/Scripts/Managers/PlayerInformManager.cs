@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInformManager : MonoBehaviour
 {
+    [SerializeField] private Image warningImage; 
     public static PlayerInformManager instance;
     private InputPlayerInform inputInform;
 
@@ -13,7 +15,7 @@ public class PlayerInformManager : MonoBehaviour
     public Transform PlayerTransform { get; private set; } // 플레이어 transform
 
     private void Awake()
-    {
+    { 
         if (instance != null) Destroy(gameObject);
         instance = this;
         playerId = -1;
@@ -32,10 +34,14 @@ public class PlayerInformManager : MonoBehaviour
 
     public void GameStart()
     {
-
-        // TODO : 게임 시작시 플레이어 세팅값 전달
-
-        SceneManagement.LoadScene("Game");
+        if(playerId != -1)
+        {
+            SceneManagement.LoadScene("Game");
+        }
+        else
+        {
+            warningImage.gameObject.SetActive(true);
+        }
     }
 
     public void SetId(int id)
