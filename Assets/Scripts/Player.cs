@@ -21,7 +21,8 @@ public class Player : MonoBehaviour
         HP = 5;
         animator.runtimeAnimatorController = animatorControllers[0];
         // ------- 테스트 끝나면 삭제 -------
-        SetPlayer(PlayerInformManager.instance.playerId);
+        if(PlayerInformManager.instance != null)
+            SetPlayer(PlayerInformManager.instance.playerId);
     }
 
     void Start()
