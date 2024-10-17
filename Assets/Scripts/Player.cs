@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
     public float speed;
     public float jumpPower;
     public int HP;
+    public bool isDead;
 
     private void Awake()
     {
+        isDead = false;
         animator = GetComponent<Animator>();
         SetPlayer(PlayerInformManager.instance.playerId);
     }

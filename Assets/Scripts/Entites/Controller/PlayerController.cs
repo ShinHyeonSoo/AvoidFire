@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     AvoidFireAnimationController controller;
 
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             controller.DeadAnim();
+            DeadSet();
             GameOver();
         }
 
@@ -64,5 +66,13 @@ public class PlayerController : MonoBehaviour
     private void GameOver()
     {
         GameManager.Instance.GameOver();
+    }
+
+    private void DeadSet()
+    {
+        player.speed = 0;
+        player.jumpPower = 0;
+        player.isDead = true;
+        _spriteRenderer.flipX = false;
     }
 }
