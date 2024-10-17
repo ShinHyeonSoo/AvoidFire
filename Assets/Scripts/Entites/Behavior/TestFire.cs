@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class TestFire : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class TestFire : MonoBehaviour
     private int groundTagHash;
     private int playerTagHash;
 
-    
+    int score = 1;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class TestFire : MonoBehaviour
         if (collisionTagHash == groundTagHash)
         {
             // TODO : 땅과 불 충돌
+            Score.Instance.AddScore(score);
             Destroy(gameObject);
         }
         else if (collisionTagHash == playerTagHash)

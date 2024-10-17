@@ -176,6 +176,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5333105418630710560, guid: 49d9420ca678b704ab5e4f94700b2962, type: 3}
+      propertyPath: titleSpriteRenderer
+      value: 
+      objectReference: {fileID: 1198495807}
+    - target: {fileID: 5333105418630710560, guid: 49d9420ca678b704ab5e4f94700b2962, type: 3}
       propertyPath: characterSelectionSceneName
       value: CharacterSelect
       objectReference: {fileID: 0}
@@ -431,6 +435,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18de317679b62f643916310382ae3080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &1198495807 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1359581255640033527, guid: d2c5e23376cd8644fa42e06588a41d95, type: 3}
+  m_PrefabInstance: {fileID: 673148592}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1278558541
 PrefabInstance:
   m_ObjectHideFlags: 0
