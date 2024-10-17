@@ -41,8 +41,18 @@ public class PlayerController : MonoBehaviour
         // TODO : 플레이어 피격 (예림) - 완료 + 죽는 모션
     }
 
+    public void TakeHeal()
+    {
+        currentHealth++;
+    }
+
     private void GameOver()
     {
         GameManager.Instance.GameOver();
+    }
+
+    public void ActivateShield(int index)
+    {
+
     }
 }
