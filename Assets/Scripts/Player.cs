@@ -1,39 +1,35 @@
-﻿using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
-{ 
-    public GameManager GameManager;
-
+{
     public RuntimeAnimatorController[] animatorControllers;
-    public AnimationController animationController;
+    public Animator animator;
 
+    public string _name;
     public float speed;
     public float jumpPower;
     public int HP;
+    public bool isDead;
 
     private void Awake()
     {
-        GameManager = GetComponent<GameManager>();
+        isDead = false;
+        animator = GetComponent<Animator>();
+        // ------- 테스트 끝나면 삭제 -------
         speed = 7f;
         jumpPower = 9f;
-        HP = 3;
-}
+        HP = 5;
+        animator.runtimeAnimatorController = animatorControllers[0];
+        // ------- 테스트 끝나면 삭제 -------
+        SetPlayer(PlayerInformManager.instance.playerId);
+    }
 
     void Start()
     {
-        //animationController.animator = GetComponent<Animator>();
-        // TODO : 추후 수정 각캐릭에 맞는 스탯을 받아오도록
     }
 
     private void OnEnable()
     {
-        // 플레이이어 아이디(캐릭터타입)에따라 애니메이터 선택하는 코드
-        // animator.runtimeAnimatorController = animatorControllers[GameManager.instance.playerId];
-
-        // SetPlayer(GameManager.instance.playerId);
     }
 
     public void ChangeAnimController()
@@ -44,17 +40,22 @@ public class Player : MonoBehaviour
 
     private void SetPlayer(int playerID)
     {
+
+        _name = PlayerInformManager.instance.playerName;
         if (playerID == 0)
         {
             speed = 7f;
-            jumpPower = 1000f;
-            HP = 4;
+            jumpPower = 9f;
+            HP = 5;
         }
-        if (playerID == 0)
+        else if (playerID == 1)
         {
             speed = 10f;
-            jumpPower = 1100f;
+            jumpPower = 10f;
             HP = 3;
         }
+
+
+        animator.runtimeAnimatorController = animatorControllers[PlayerInformManager.instance.playerId];
     }
 }

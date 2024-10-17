@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TweenRanking : MonoBehaviour
 {
+    [SerializeField] private GameObject _gameOverPanel;
     private RectTransform _rectTrans;
 
     private float _startPosY;
@@ -24,12 +25,7 @@ public class TweenRanking : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        var seq = DOTween.Sequence();
-        seq.Append(_rectTrans.DOAnchorPosY(_targetPosY - _targetOffset, _duration));
-        seq.Append(_rectTrans.DOAnchorPosY(_targetPosY + _targetOffset, _swingDuration));
-        seq.Append(_rectTrans.DOAnchorPosY(_targetPosY, _swingDuration));
-
-        seq.Play().SetUpdate(true);
+        StartCoroutine(CoroutineShow());
     }
 
     public void Close()
@@ -40,5 +36,17 @@ public class TweenRanking : MonoBehaviour
         seq.Append(_rectTrans.DOAnchorPosY(_startPosY, _duration));
 
         seq.Play().SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
+    }
+
+    IEnumerator CoroutineShow()
+    {
+        yield return new WaitUntil(() => !_gameOverPanel.activeSelf);
+
+        var seq = DOTween.Sequence();
+        seq.Append(_rectTrans.DOAnchorPosY(_targetPosY - _targetOffset, _duration));
+        seq.Append(_rectTrans.DOAnchorPosY(_targetPosY + _targetOffset, _swingDuration));
+        seq.Append(_rectTrans.DOAnchorPosY(_targetPosY, _swingDuration));
+
+        seq.Play().SetUpdate(true);
     }
 }
