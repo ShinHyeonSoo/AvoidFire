@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
 
         isGameOver = true;
-        //UIManager.Instance.ShowGameOver();  //TODO:: UI매니저 인스턴스화
+        UIManager.Instance.ShowGameOver();
     }
 
     public void RestartGame()

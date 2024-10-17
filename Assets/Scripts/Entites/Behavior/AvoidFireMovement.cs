@@ -49,8 +49,9 @@ public class AvoidFireMovement : MonoBehaviour
         if (isGrounded && isJump)
         {
             // TODO : 점프 높이 테스트 해서 결정
-            movementRigidbody.AddForce(new Vector2(0, player.jumpPower)); // 점프 힘 설정
+            movementRigidbody.AddForce(new Vector2(0, player.jumpPower), ForceMode2D.Impulse); // 점프 힘 설정
             isGrounded = false; // 점프 후에는 공중 상태로 설정
+            SoundManager.Instance.Play("jump", Sound.Sfx, 0.5f);
         }
     }
 

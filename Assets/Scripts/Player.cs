@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     {
         GameManager = GetComponent<GameManager>();
         speed = 7f;
-        jumpPower = 1000f;
+        jumpPower = 9f;
         HP = 3;
 }
 

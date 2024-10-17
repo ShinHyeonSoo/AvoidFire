@@ -10,6 +10,8 @@ public class TestFire : MonoBehaviour
     private int groundTagHash;
     private int playerTagHash;
 
+    
+
     private void Awake()
     {
         groundTagHash = "Ground".GetHashCode();
@@ -42,5 +44,11 @@ public class TestFire : MonoBehaviour
         }
 
         // TODO : 이펙트 생성
+
+    }
+    public float FallSpeed
+    {
+        get { return fallSpeed; }
+        set { fallSpeed = value; }
     }
 }
