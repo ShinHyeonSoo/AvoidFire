@@ -1,7 +1,4 @@
-﻿using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +15,12 @@ public class Player : MonoBehaviour
     {
         isDead = false;
         animator = GetComponent<Animator>();
+        // ------- 테스트 끝나면 삭제 -------
+        speed = 7f;
+        jumpPower = 9f;
+        HP = 5;
+        animator.runtimeAnimatorController = animatorControllers[0];
+        // ------- 테스트 끝나면 삭제 -------
         SetPlayer(PlayerInformManager.instance.playerId);
     }
 
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour
 
     private void SetPlayer(int playerID)
     {
+
         _name = PlayerInformManager.instance.playerName;
         if (playerID == 0)
         {
@@ -50,6 +54,7 @@ public class Player : MonoBehaviour
             jumpPower = 10f;
             HP = 3;
         }
+
 
         animator.runtimeAnimatorController = animatorControllers[PlayerInformManager.instance.playerId];
     }
