@@ -227,6 +227,7 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   HP: 0
+  isDead: 0
 --- !u!114 &8356820640791947365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,3 +290,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e1a93602e582e488e7ec633407636c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 2481720723541906786}

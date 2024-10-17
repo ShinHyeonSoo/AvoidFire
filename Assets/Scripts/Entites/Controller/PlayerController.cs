@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Player player;
+    private Player player;
+    public GameObject playerObject;
 
     private int currentHealth;
     private int maxHealth;
@@ -70,9 +69,21 @@ public class PlayerController : MonoBehaviour
 
     private void DeadSet()
     {
-        player.speed = 0;
-        player.jumpPower = 0;
-        player.isDead = true;
+        Collider2D playerCollider = playerObject.GetComponent<Collider2D>();
+        if (playerCollider != null)
+        {
+            Debug.Log("collider");
+            playerCollider.enabled = false;  // 콜라이더 비활성화
+        }
+
+        Rigidbody2D playerRigidbody = playerObject.GetComponent<Rigidbody2D>();
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+        }
+
         _spriteRenderer.flipX = false;
+        player.isDead = true;
     }
+    
 }
