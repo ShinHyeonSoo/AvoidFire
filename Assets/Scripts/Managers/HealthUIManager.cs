@@ -46,4 +46,12 @@ public class HealthUIManager : MonoBehaviour
             }
         }
     }
+
+    public void AddHeart()
+    {
+        GameObject heart = Instantiate(heartPrefab, heartPosition);
+        Image heartImage = heart.GetComponent<Image>();
+        heartImage.sprite = fullHeartSprite;
+        heartList.Add(heartImage);
+    }
 }

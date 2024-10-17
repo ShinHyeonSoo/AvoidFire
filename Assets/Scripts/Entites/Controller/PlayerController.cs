@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     Player player;
 
     private int currentHealth;
+    private int maxHealth;
     private bool isActiveShield = false;
 
     private HealthUIManager healthUIManager;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         // TODO : 하트 개수 변경 (예림) - 완료
         currentHealth = player.HP;
+        maxHealth = currentHealth;
         healthUIManager = FindObjectOfType<HealthUIManager>();
         healthUIManager.InitializeHealthUI(currentHealth);
     }
@@ -49,6 +51,13 @@ public class PlayerController : MonoBehaviour
     public void TakeHeal()
     {
         currentHealth++;
+        //UI업데이트
+        if (currentHealth > maxHealth)
+        {
+            maxHealth = currentHealth;
+            healthUIManager.AddHeart();
+        }
+
         healthUIManager.UpdateHealthUI(currentHealth);
     }
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class RandomEffectManager : MonoBehaviour
 
     [SerializeField] private float magnetRadius = 10f;
     [SerializeField] private float magnetPullForce = 30f;
+    [SerializeField] private TextMeshProUGUI effectMessageText;
+    [SerializeField] private float messageDisplayTime = 2f;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class RandomEffectManager : MonoBehaviour
             controller = playerObject.GetComponent<PlayerController>();
             originalPlayerTag = playerObject.tag;
         }
+        effectMessageText.gameObject.SetActive(false);
     }
 
     public void ApplyRandomEffect()
@@ -31,12 +35,15 @@ public class RandomEffectManager : MonoBehaviour
         {
             case 1:
                 StartCoroutine(ApplyTimeSlowAndSpeedUp());
+                ShowMessage("잠깐 시간이 느려져요 !");
                 break;
             case 2:
                 StartCoroutine(ActivateMagnet(15f));
+                ShowMessage("몸에 블랙홀이 생겼어요 !");
                 break;
             case 3:
                 IncreasePlayerHealth();
+                ShowMessage("체력이 1 증가했어요 !");
                 break;
         }
     }
@@ -46,7 +53,7 @@ public class RandomEffectManager : MonoBehaviour
         Time.timeScale = 0.5f;
         player.speed *= 1.5f;
 
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(8f);
 
         Time.timeScale = 1f;
         player.speed /= 1.5f;
@@ -83,4 +90,18 @@ public class RandomEffectManager : MonoBehaviour
         player.gameObject.tag = originalPlayerTag;
     }
 
+    private void ShowMessage(string message)
+    {
+        effectMessageText.gameObject.SetActive(true);
+        effectMessageText.text = message;
+
+        StartCoroutine(HideMessageAfterTime());
+    }
+
+    private IEnumerator HideMessageAfterTime()
+    {
+        yield return new WaitForSeconds(messageDisplayTime);
+
+        effectMessageText.gameObject.SetActive(false);
+    }
 }
