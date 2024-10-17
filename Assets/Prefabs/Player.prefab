@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4657766648707055585}
   - component: {fileID: 7688409809024033805}
   - component: {fileID: 6867885310230264370}
-  - component: {fileID: 3285282285577425574}
+  - component: {fileID: 4789174777706173569}
   - component: {fileID: 62586905486132278}
   - component: {fileID: 7910089250287553471}
   - component: {fileID: 6994770595218403391}
@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7914419074853740353}
   - component: {fileID: 6943119036063873236}
   - component: {fileID: 8559663599433414936}
-  - component: {fileID: 1625728152017371086}
+  - component: {fileID: 7022122872900022670}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 8.9
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -121,8 +121,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3285282285577425574
-BoxCollider2D:
+--- !u!70 &4789174777706173569
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -154,18 +154,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.03}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.1111112}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.5, y: 1.05}
-  m_EdgeRadius: 0
+  m_Direction: 0
 --- !u!114 &62586905486132278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7910089250287553471}
---- !u!114 &1625728152017371086
+--- !u!114 &7022122872900022670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,4 +287,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e1a93602e582e488e7ec633407636c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
