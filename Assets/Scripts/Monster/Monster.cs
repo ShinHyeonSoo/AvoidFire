@@ -1,18 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    private int hp;
-    private float minX = -8f;
-    private float maxX = 8f;
-    private int groundTagHash;
-    private int playerTagHash;
+    private float minX = -8.3f;
+    private float maxX = 8.3f;
+    float knockback = 3; // 튕겨나갈 정도
+    float knockbackpower = 2; // 튕겨나갈 힘
+    public float speed;
+
     MonsterSpawn monsterSpawn;
 
     SpriteRenderer monsterRenderer;
+    Rigidbody2D rb2d;
 
     void Update()
     {
@@ -22,21 +22,31 @@ public class Monster : MonoBehaviour
     {
         monsterSpawn = GetComponentInParent<MonsterSpawn>();
         monsterRenderer = GetComponent<SpriteRenderer>();
+        rb2d = GetComponent<Rigidbody2D>();
+        if (transform.position.x < minX)
+        {
+            gameObject.SetActive(false);
+            Score.Instance.AddScore(10);
+        }
 
-        monsterSpawn.speed =3;
-        monsterSpawn.hp =3;
-        monsterSpawn.MonsterType();
-
-
-        if (transform.position.x <= minX)
-            monsterRenderer.flipX = false;
-
-        if (transform.position.x >= maxX)
-            monsterRenderer.flipX = true;
-
+        if (transform.position.x > maxX)
+        {
+            gameObject.SetActive(false);
+            Score.Instance.AddScore(10); // 점수올라가는지 확인
+        }
         if (monsterRenderer.flipX)
-            transform.Translate(Vector3.left * monsterSpawn.speed * Time.deltaTime);
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
 
-        else transform.Translate(Vector3.right * monsterSpawn.speed * Time.deltaTime);
+        else transform.Translate(Vector3.right * speed * Time.deltaTime);
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            float dirX = transform.position.x - collision.transform.position.x > 0 ? (knockback) : -(knockbackpower);
+            rb2d.AddForce(new Vector2(dirX, (knockback)) * (knockbackpower), ForceMode2D.Impulse);
+        }
     }
 }
