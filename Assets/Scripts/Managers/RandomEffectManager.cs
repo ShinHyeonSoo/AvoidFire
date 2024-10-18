@@ -37,7 +37,7 @@ public class RandomEffectManager : MonoBehaviour
 
     public void ApplyRandomEffect()
     {
-        int randomEffect = Random.Range(1, 5);
+        int randomEffect = 4;//Random.Range(1, 5);
 
         switch (randomEffect)
         {
@@ -62,6 +62,7 @@ public class RandomEffectManager : MonoBehaviour
             case 4:
                 StartCoroutine(ActivateAvoidFireEffect());
                 StartCoroutine(AutoModeTimer());
+                // TODO : ±âÂù
                 break;
         }
     }
