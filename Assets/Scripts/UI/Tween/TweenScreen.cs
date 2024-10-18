@@ -17,8 +17,7 @@ public class TweenScreen : MonoBehaviour
         DOTween.Init();
         _rectTrans = GetComponent<RectTransform>();
 
-        if (SceneManager.GetActiveScene().name != "Title")
-            Open();
+        Open();
     }
 
     public void Close(string sceneName)

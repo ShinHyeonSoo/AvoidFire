@@ -14656,7 +14656,7 @@ GameObject:
   - component: {fileID: 3280519133390621041}
   - component: {fileID: 7216322125186800614}
   m_Layer: 0
-  m_Name: Aura
+  m_Name: Aura_yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

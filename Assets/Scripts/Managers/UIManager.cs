@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [Header("Panel")]
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private TweenScreen _tweenScreen;
 
     private TweenButton tweenButton;
 
@@ -20,7 +21,7 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -57,6 +58,12 @@ public class UIManager : MonoBehaviour
     public void ResumeGame()
     {
         StartCoroutine(CoroutineResume());
+    }
+
+    public void TweenScreenClose(string sceneName)
+    {
+        _tweenScreen.Close(sceneName);
+        Time.timeScale = 1f;
     }
 
     IEnumerator CoroutineResume()

@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private bool isGameOver = false;
 
-    public DataManager _dataManager; // GetComponent 지웠습니다. 사용시 다시 설정해주세요.
-
     private void Awake()
     {
         if (Instance == null)
@@ -35,11 +33,6 @@ public class GameManager : MonoBehaviour
 
         isGameOver = true;
         UIManager.Instance.ShowGameOver();
-    }
-
-    public void RestartGame()
-    {
-        //TODO :: 게임 재시작 로직
     }
 
     public void AddScore(int points)
