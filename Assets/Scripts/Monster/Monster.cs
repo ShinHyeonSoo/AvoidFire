@@ -1,15 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    private int hp;
-    private float minX = -8f;
-    private float maxX = 8f;
-    private int groundTagHash;
-    private int playerTagHash;
+    private float minX = -8.3f;
+    private float maxX = 8.3f;
+
     MonsterSpawn monsterSpawn;
 
     SpriteRenderer monsterRenderer;
@@ -23,17 +19,18 @@ public class Monster : MonoBehaviour
         monsterSpawn = GetComponentInParent<MonsterSpawn>();
         monsterRenderer = GetComponent<SpriteRenderer>();
 
-        monsterSpawn.speed =3;
-        monsterSpawn.hp =3;
-        monsterSpawn.MonsterType();
+        if (transform.position.x < minX)
+        {
+            //monsterRenderer.flipX = false;
+            gameObject.SetActive(false);
+        }
 
-
-        if (transform.position.x <= minX)
-            monsterRenderer.flipX = false;
-
-        if (transform.position.x >= maxX)
-            monsterRenderer.flipX = true;
-
+        //몬스터를 뽑을때 flip되게 해야겟다 
+        if (transform.position.x > maxX)
+        {
+            //monsterRenderer.flipX = true;
+            gameObject.SetActive(false);
+        }
         if (monsterRenderer.flipX)
             transform.Translate(Vector3.left * monsterSpawn.speed * Time.deltaTime);
 
