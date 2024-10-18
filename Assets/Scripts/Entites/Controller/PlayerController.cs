@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         {
             controller.DeadAnim();
             DeadSet();
+            Score.Instance.CallUpdateScores();
             GameOver();
         }
 
