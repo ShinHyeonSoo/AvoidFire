@@ -1,22 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
+    public int curScore;
     public int highScore;
-    public int lastScore;
+
+    public event Action<int, int> scoreEvent;
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,14 +27,11 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateScores(int newScore)
     {
-        lastScore = newScore;
+        curScore = newScore;
         if (newScore > highScore)
         {
             highScore = newScore;
         }
-    }
-    public void GoToScoreboard()
-    {
-        SceneManager.LoadScene("ScoreboardScene");
+        scoreEvent?.Invoke(curScore, highScore);
     }
 }
