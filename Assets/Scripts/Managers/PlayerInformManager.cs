@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerInformManager : MonoBehaviour
 {
-    [SerializeField] private Image warningImage; 
+    [SerializeField] private Image warningImage;
+    [SerializeField] private TweenScreen tweenScreen;
     public static PlayerInformManager instance;
     private InputPlayerInform inputInform;
 
@@ -36,7 +37,7 @@ public class PlayerInformManager : MonoBehaviour
     {
         if(playerId != -1)
         {
-            SceneManagement.LoadScene("Game");
+            tweenScreen.Close("Game");
         }
         else
         {

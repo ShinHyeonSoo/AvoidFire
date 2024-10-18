@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -11,6 +12,8 @@ public class FireProjectile : MonoBehaviour
     private int groundTagHash;
     private int playerTagHash;
     private int playerMagnetHash;
+
+    private readonly float Distance = 0.25f;
 
     int score = 1;
     int magnetScore = 2;
@@ -27,6 +30,18 @@ public class FireProjectile : MonoBehaviour
         transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
     }
 
+    private void CreateEffect(Collision2D collision)
+    {
+        Vector3 fireColliderCenter = GetComponent<Collider2D>().bounds.center;
+        Vector3 groundColliderCenter = collision.gameObject.GetComponent<Collider2D>().bounds.center;
+
+        Vector3 dir = (fireColliderCenter - groundColliderCenter).normalized;
+
+        Vector3 hitPos = fireColliderCenter - dir * Distance;
+
+        EffectManager.Instance.ShotEffect("explosion", hitPos);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // 충돌대상 해쉬값 가져오고
@@ -36,6 +51,7 @@ public class FireProjectile : MonoBehaviour
         {
             // TODO : 땅과 불 충돌
             Score.Instance.AddScore(score);
+            CreateEffect(collision);
             Destroy(gameObject);
         }
         else if (collisionTagHash == playerTagHash)
@@ -45,6 +61,7 @@ public class FireProjectile : MonoBehaviour
             {
                 player.TakeDamage();
             }
+            CreateEffect(collision);
             Destroy(gameObject);
         }
         else if (collisionTagHash == playerMagnetHash)
@@ -52,9 +69,6 @@ public class FireProjectile : MonoBehaviour
             Score.Instance.AddScore(magnetScore);
             Destroy(gameObject);
         }
-
-        // TODO : 이펙트 생성
-
     }
     public float FallSpeed
     {

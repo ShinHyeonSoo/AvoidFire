@@ -49,9 +49,17 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void Explosion(Vector3 pos)
+    public void ShotEffect(string tag, Vector3 pos)
     {
-        GameObject effect = _effectPool.SpawnFromPool("explosion");
+        GameObject effect = _effectPool.SpawnFromPool(tag);
         effect.transform.position = pos;
+    }
+
+    public GameObject FollowEffect(string tag, GameObject player)
+    {
+        GameObject effect = _effectPool.SpawnFromPool(tag);
+        effect.GetComponent<EffectFollowPlayer>().SetPlayer(player);
+
+        return effect;
     }
 }

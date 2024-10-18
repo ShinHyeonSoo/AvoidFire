@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        // TODO : 하트 개수 변경 (예림) - 완료
         currentHealth = player.HP;
         maxHealth = currentHealth;
         healthUIManager = FindObjectOfType<HealthUIManager>();
@@ -32,21 +31,29 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage()
     {
+        if (isActiveShield == false)
+        {
+            Debug.Log(currentHealth);
+            currentHealth--;
+
+            Debug.Log(currentHealth);
+            healthUIManager.UpdateHealthUI(currentHealth);
+        }
+
         if (currentHealth <= 0)
         {
             controller.DeadAnim();
             DeadSet();
             GameOver();
+            SoundManager.Instance.Play("bomb", Sound.Sfx);
         }
-
-        if (isActiveShield == false)
+        else
         {
-            currentHealth--;
-            healthUIManager.UpdateHealthUI(currentHealth);
+            SoundManager.Instance.Play("damage", Sound.Sfx);
+            EffectManager.Instance.ShotEffect("hurt", transform.position);
         }
 
         controller.HitAnim();
-        // TODO : 플레이어 피격 (예림) - 완료 + 죽는 모션
     }
 
     public void TakeHeal()

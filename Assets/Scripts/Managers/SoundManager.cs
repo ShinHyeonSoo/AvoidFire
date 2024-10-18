@@ -19,6 +19,8 @@ public class SoundManager : MonoBehaviour
     private AudioSource[] _audioSources = new AudioSource[(int)Sound.Max];
     private Dictionary<string, AudioClip> _audioClipDic = new Dictionary<string, AudioClip>();
 
+    private ObjectPool _sfxPool;
+
     public float BgmVolume {  get; set; }
     public float SfxVolume {  get; set; }
 
@@ -62,6 +64,7 @@ public class SoundManager : MonoBehaviour
         }
         InitVolume(0.3f, 0.3f);
         _audioSources[(int)Sound.Bgm].loop = true; // bgm 재생기는 무한 반복 재생
+        _sfxPool = GetComponent<ObjectPool>();
 
         LoadSounds();
     }
@@ -125,9 +128,13 @@ public class SoundManager : MonoBehaviour
         }
         else // Sfx 효과음 재생
         {
-            AudioSource audioSource = _audioSources[(int)Sound.Sfx];
-            audioSource.volume = SfxVolume * volume;
-            audioSource.PlayOneShot(audioClip);
+            //AudioSource audioSource = _audioSources[(int)Sound.Sfx];
+            //audioSource.volume = SfxVolume * volume;
+            //audioSource.PlayOneShot(audioClip);
+
+            var obj = _sfxPool.SpawnFromPool("audiosource");
+            obj.GetComponent<AudioSource>().volume = SfxVolume * volume;
+            obj.GetComponent<AudioSource>().PlayOneShot(audioClip);
         }
     }
 
@@ -148,9 +155,13 @@ public class SoundManager : MonoBehaviour
         }
         else // Sfx 효과음 재생
         {
-            AudioSource audioSource = _audioSources[(int)Sound.Sfx];
-            audioSource.volume = SfxVolume * volume;
-            audioSource.PlayOneShot(_audioClipDic[audioName]);
+            //AudioSource audioSource = _audioSources[(int)Sound.Sfx];
+            //audioSource.volume = SfxVolume * volume;
+            //audioSource.PlayOneShot(_audioClipDic[audioName]);
+
+            var obj = _sfxPool.SpawnFromPool("audiosource");
+            obj.GetComponent<AudioSource>().volume = SfxVolume * volume;
+            obj.GetComponent<AudioSource>().PlayOneShot(_audioClipDic[audioName]);
         }
     }
 
