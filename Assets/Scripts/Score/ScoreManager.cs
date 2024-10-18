@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class ScoreManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class ScoreManager : MonoBehaviour
 
     public int highScore;
     public int lastScore;
+
+    [SerializeField] TextMeshProUGUI currentScoreText;
+    [SerializeField] TextMeshProUGUI bestScoreText;
 
     void Awake()
     {
@@ -31,6 +35,8 @@ public class ScoreManager : MonoBehaviour
         {
             highScore = newScore;
         }
+        currentScoreText.text = lastScore.ToString();
+        bestScoreText.text = highScore.ToString();
     }
     public void GoToScoreboard()
     {
