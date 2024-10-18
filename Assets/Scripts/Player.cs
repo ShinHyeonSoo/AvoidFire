@@ -16,12 +16,13 @@ public class Player : MonoBehaviour
         isDead = false;
         animator = GetComponent<Animator>();
         // ------- 테스트 끝나면 삭제 -------
-        speed = 7f;
-        jumpPower = 9f;
-        HP = 5;
-        animator.runtimeAnimatorController = animatorControllers[0];
+        speed = 10f;
+        jumpPower = 10f;
+        HP = 3;
+        animator.runtimeAnimatorController = animatorControllers[1];
         // ------- 테스트 끝나면 삭제 -------
-        SetPlayer(PlayerInformManager.instance.playerId);
+        if(PlayerInformManager.instance != null)
+            SetPlayer(PlayerInformManager.instance.playerId);
     }
 
     void Start()

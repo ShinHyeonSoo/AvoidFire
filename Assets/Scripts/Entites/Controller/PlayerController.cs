@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             controller.DeadAnim();
             DeadSet();
+            Score.Instance.CallUpdateScores();
             GameOver();
             SoundManager.Instance.Play("bomb", Sound.Sfx);
         }
@@ -79,7 +80,6 @@ public class PlayerController : MonoBehaviour
         Collider2D playerCollider = playerObject.GetComponent<Collider2D>();
         if (playerCollider != null)
         {
-            Debug.Log("collider");
             playerCollider.enabled = false;  // 콜라이더 비활성화
         }
 

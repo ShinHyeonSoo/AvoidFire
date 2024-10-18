@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 public class FireProjectile : MonoBehaviour
 {
@@ -44,6 +45,13 @@ public class FireProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         // 충돌대상 해쉬값 가져오고
         int collisionTagHash = collision.gameObject.tag.GetHashCode();
 
