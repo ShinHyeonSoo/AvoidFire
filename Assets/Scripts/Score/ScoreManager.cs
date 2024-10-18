@@ -10,11 +10,12 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
+    [SerializeField] TextMeshProUGUI currentScoreText;
+    [SerializeField] TextMeshProUGUI bestScoreText;
+
     public int curScore;
     public int highScore;
 
-    [SerializeField] TextMeshProUGUI currentScoreText;
-    [SerializeField] TextMeshProUGUI bestScoreText;
 
     void Awake()
     {
@@ -35,11 +36,7 @@ public class ScoreManager : MonoBehaviour
         {
             highScore = newScore;
         }
-        currentScoreText.text = lastScore.ToString();
+        currentScoreText.text = curScore.ToString();
         bestScoreText.text = highScore.ToString();
-    }
-    public void GoToScoreboard()
-    {
-        SceneManager.LoadScene("ScoreboardScene");
     }
 }
