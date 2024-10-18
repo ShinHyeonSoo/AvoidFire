@@ -10,19 +10,21 @@ public class MonsterSpawn : MonoBehaviour
 
     float minX = -8f;
     float maxX = 8f;
-    public int speed;
 
     private void Start()
     {
-        InvokeRepeating("SpawnMonster", 0f, 5f);
+        InvokeRepeating("SpawnMonster", 0f, 7f);
     }
 
     public void SpawnMonster()
     {
         string tag = Random.Range(0, 2) == 0 ? "zombiePrefab" : "skeletonPrefab";
-        GameObject monsterSpawn = objectPool.SpawnFromPool(tag);
-        SpriteRenderer spriteRenderer = monsterSpawn.GetComponent<SpriteRenderer>();
-        speed = Random.Range(1, 10);
+
+        GameObject monsterspawn = objectPool.SpawnFromPool(tag);
+        SpriteRenderer spriteRenderer = monsterspawn.GetComponent<SpriteRenderer>();
+
+        Monster monster = monsterspawn.GetComponent<Monster>();
+        monster.speed = Random.Range(1, 6);
         int randomX = Random.Range(0, 2);
         float spawnX = randomX == 0 ? minX : maxX;
 
@@ -32,6 +34,6 @@ public class MonsterSpawn : MonoBehaviour
         float spawnY = -2f;
 
         // 몬스터 위치 설정
-        monsterSpawn.transform.position = new Vector2(spawnX, spawnY);
+        monsterspawn.transform.position = new Vector2(spawnX, spawnY);
     }
 }
