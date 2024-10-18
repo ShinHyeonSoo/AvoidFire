@@ -26,7 +26,6 @@ public class Score : MonoBehaviour
             Destroy(gameObject); // 이미 인스턴스가 있다면 새로운 인스턴스를 파괴
         }
     }
-
     public void CallUpdateScores()
     {
         string playerName = PlayerInformManager.instance.playerName;

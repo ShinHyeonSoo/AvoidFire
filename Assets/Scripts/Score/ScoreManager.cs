@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,18 +10,18 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
-    public int highScore;
-    public int lastScore;
-
     [SerializeField] TextMeshProUGUI currentScoreText;
     [SerializeField] TextMeshProUGUI bestScoreText;
+
+    public int curScore;
+    public int highScore;
+
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -30,16 +31,12 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateScores(int newScore)
     {
-        lastScore = newScore;
+        curScore = newScore;
         if (newScore > highScore)
         {
             highScore = newScore;
         }
-        currentScoreText.text = lastScore.ToString();
+        currentScoreText.text = curScore.ToString();
         bestScoreText.text = highScore.ToString();
-    }
-    public void GoToScoreboard()
-    {
-        SceneManager.LoadScene("ScoreboardScene");
     }
 }

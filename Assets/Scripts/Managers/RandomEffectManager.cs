@@ -7,6 +7,8 @@ public class RandomEffectManager : MonoBehaviour
 {
     private Player player;
     private PlayerController controller;
+    private AvoidFireAutoMovement avoidFireAutoMovement;
+    private AvoidFireMovement avoidFireMovement;
 
     private string originalPlayerTag;
 
@@ -14,6 +16,7 @@ public class RandomEffectManager : MonoBehaviour
     [SerializeField] private float magnetPullForce = 30f;
     [SerializeField] private TextMeshProUGUI effectMessageText;
     [SerializeField] private float messageDisplayTime = 2f;
+    [SerializeField] private float avoidFireDuration = 10f;
 
     private void Awake()
     {
@@ -23,13 +26,16 @@ public class RandomEffectManager : MonoBehaviour
             player = playerObject.GetComponent<Player>();
             controller = playerObject.GetComponent<PlayerController>();
             originalPlayerTag = playerObject.tag;
+
+            avoidFireAutoMovement = playerObject.GetComponent<AvoidFireAutoMovement>();
+            avoidFireMovement = playerObject. GetComponent<AvoidFireMovement>();
         }
         effectMessageText.gameObject.SetActive(false);
     }
 
     public void ApplyRandomEffect()
     {
-        int randomEffect = Random.Range(1, 4);
+        int randomEffect = Random.Range(1, 5);
 
         switch (randomEffect)
         {
@@ -45,6 +51,10 @@ public class RandomEffectManager : MonoBehaviour
                 IncreasePlayerHealth();
                 ShowMessage("체력이 1 증가했어요 !");
                 break;
+            case 4:
+                StartCoroutine(ActivateAvoidFireEffect());
+                StartCoroutine(AutoModeTimer());
+                break;
         }
     }
 
@@ -57,6 +67,19 @@ public class RandomEffectManager : MonoBehaviour
 
         Time.timeScale = 1f;
         player.speed /= 1.5f;
+    }
+
+    private IEnumerator ActivateAvoidFireEffect()
+    {
+        avoidFireMovement.enabled = false;
+        avoidFireAutoMovement.enabled = true;
+
+        player.gameObject.tag = "Ground";
+        yield return new WaitForSeconds(avoidFireDuration);
+        player.gameObject.tag = originalPlayerTag;
+
+        avoidFireAutoMovement.enabled = false;
+        avoidFireMovement.enabled = true;
     }
 
     private void IncreasePlayerHealth()
@@ -102,6 +125,18 @@ public class RandomEffectManager : MonoBehaviour
     {
         yield return new WaitForSeconds(messageDisplayTime);
 
+        effectMessageText.gameObject.SetActive(false);
+    }
+
+    private IEnumerator AutoModeTimer()
+    {
+        effectMessageText.gameObject.SetActive(true);
+
+        for (int i = 10; i > 0; i--)
+        {
+            effectMessageText.text = $"자동모드 적용중 남은시간 : {i}";
+            yield return new WaitForSeconds(1);
+        }
         effectMessageText.gameObject.SetActive(false);
     }
 }

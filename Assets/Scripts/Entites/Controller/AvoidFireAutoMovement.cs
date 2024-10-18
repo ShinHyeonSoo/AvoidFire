@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleNPCAvoidanceController : MonoBehaviour
+public class AvoidFireAutoMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float detectionRange = 5f;
