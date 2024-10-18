@@ -35,11 +35,11 @@ public class RandomEffectManager : MonoBehaviour
         {
             case 1:
                 StartCoroutine(ApplyTimeSlowAndSpeedUp());
-                ShowMessage("잠깐 시간이 느려져요 !");
+                ShowMessage("잠깐 시간이 느려져요 ! 좋은건가..?");
                 break;
             case 2:
                 StartCoroutine(ActivateMagnet(15f));
-                ShowMessage("몸에 블랙홀이 생겼어요 !");
+                ShowMessage("몸에 블랙홀이 생겼어요 ! 블랙홀에 불이 닿으면 점수를 두배로 줘요 !");
                 break;
             case 3:
                 IncreasePlayerHealth();
@@ -66,7 +66,7 @@ public class RandomEffectManager : MonoBehaviour
 
     private IEnumerator ActivateMagnet(float duration)
     {
-        player.gameObject.tag = "Ground";
+        player.gameObject.tag = "Magnet";
 
         float elapsedTime = 0f;
         

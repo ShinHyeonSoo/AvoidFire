@@ -4,19 +4,22 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class TestFire : MonoBehaviour
+public class FireProjectile : MonoBehaviour
 {
     [SerializeField] private float fallSpeed = 5f;
 
     private int groundTagHash;
     private int playerTagHash;
+    private int playerMagnetHash;
 
     int score = 1;
+    int magnetScore = 2;
 
     private void Awake()
     {
         groundTagHash = "Ground".GetHashCode();
         playerTagHash = "Player".GetHashCode();
+        playerMagnetHash = "Magnet".GetHashCode();
     }
 
     private void Update()
@@ -42,6 +45,11 @@ public class TestFire : MonoBehaviour
             {
                 player.TakeDamage();
             }
+            Destroy(gameObject);
+        }
+        else if (collisionTagHash == playerMagnetHash)
+        {
+            Score.Instance.AddScore(magnetScore);
             Destroy(gameObject);
         }
 
