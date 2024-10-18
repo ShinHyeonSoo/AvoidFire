@@ -32,10 +32,19 @@ public class ScoreManager : MonoBehaviour
     public void UpdateScores(int newScore)
     {
         curScore = newScore;
+
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            highScore = PlayerPrefs.GetInt("HighScore", 0);
+        }
+
         if (newScore > highScore)
         {
             highScore = newScore;
         }
+
+        PlayerPrefs.SetInt("HighScore", highScore);
+
         currentScoreText.text = curScore.ToString();
         bestScoreText.text = highScore.ToString();
     }
