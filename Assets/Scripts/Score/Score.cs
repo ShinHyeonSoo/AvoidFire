@@ -7,7 +7,7 @@ public class Score : MonoBehaviour
 {
     public static Score Instance;
     public Text totalScoreTxt;
-
+    public RankingManager rankingManager;
     int totalScore;
 
     public void AddScore(int score)
@@ -29,6 +29,8 @@ public class Score : MonoBehaviour
 
     public void CallUpdateScores()
     {
+        string playerName = PlayerInformManager.instance.playerName;
+        rankingManager.AddNewScore(playerName, totalScore);
         ScoreManager.Instance.UpdateScores(totalScore);
     }
 }
