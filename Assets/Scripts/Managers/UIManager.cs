@@ -46,7 +46,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOver()
     {
-        Score.Instance.CallUpdateScores();
         tweenButton.OnButtonOpen(gameOverPanel);
     }
 
