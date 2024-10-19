@@ -49,7 +49,7 @@ public class RandomEffectManager : MonoBehaviour
                 break;
             case 2:
                 StartCoroutine(ActivateMagnet(5f));
-                ShowMessage("몸에 블랙홀이 생겼어요 ! 블랙홀에 불이 닿으면 점수를 두배로 줘요 !");
+                ShowMessage("몸에 신기한 블랙홀이 생겼어요 ! 이 블랙홀은 불을 점수로 바꿔줘요 !");
                 _effectObj = EffectManager.Instance.FollowEffect("magnet", player.gameObject);
                 SoundManager.Instance.Play("magnet", Sound.Sfx);
                 break;
@@ -149,7 +149,7 @@ public class RandomEffectManager : MonoBehaviour
 
         for (int i = 10; i > 0; i--)
         {
-            effectMessageText.text = $"자동모드 적용중 남은시간 : {i}";
+            effectMessageText.text = $"슈퍼모드 적용중 남은시간 : {i}";
             yield return new WaitForSeconds(1);
         }
         effectMessageText.gameObject.SetActive(false);

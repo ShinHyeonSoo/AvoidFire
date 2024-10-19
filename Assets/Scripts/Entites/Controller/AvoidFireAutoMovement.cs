@@ -8,7 +8,7 @@ public class AvoidFireAutoMovement : MonoBehaviour
     [SerializeField] private float detectionRange = 5f;
     [SerializeField] private float avoidDistance = 2f;
     //벽에못비비게 한계값 주기
-    [SerializeField] private float boundaryX = 8f;
+    [SerializeField] private float boundaryX = 6f;
 
     private Vector2 movementDirection;
     private int fireTagHash;
