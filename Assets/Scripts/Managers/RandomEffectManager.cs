@@ -62,6 +62,8 @@ public class RandomEffectManager : MonoBehaviour
             case 4:
                 StartCoroutine(ActivateAvoidFireEffect());
                 StartCoroutine(AutoModeTimer());
+                _effectObj = EffectManager.Instance.FollowEffect("super", player.gameObject);
+                SoundManager.Instance.Play("super", Sound.Sfx);
                 // TODO : ±âÂù
                 break;
         }
@@ -92,6 +94,9 @@ public class RandomEffectManager : MonoBehaviour
 
         avoidFireAutoMovement.enabled = false;
         avoidFireMovement.enabled = true;
+
+        _effectObj.SetActive(false);
+        _effectObj = null;
     }
 
     private void IncreasePlayerHealth()
