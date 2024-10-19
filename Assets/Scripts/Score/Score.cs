@@ -8,11 +8,14 @@ public class Score : MonoBehaviour
     public static Score Instance;
     public Text totalScoreTxt;
     public RankingManager rankingManager;
-    int totalScore;
+    public int totalScore;
 
     public void AddScore(int score)
     {
-        totalScore += score;
+        if (GameManager.Instance.IsGameOver == false)
+        {
+            totalScore += score;
+        }
         totalScoreTxt.text = totalScore.ToString();
     }
     void Awake()
@@ -23,12 +26,16 @@ public class Score : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject); // 이미 인스턴스가 있다면 새로운 인스턴스를 파괴
+            Destroy(gameObject);
         }
     }
     public void CallUpdateScores()
     {
         string playerName = PlayerInformManager.instance.playerName;
+        if (playerName == null)
+        {
+            playerName = "이름없음";
+        }
         rankingManager.AddNewScore(playerName, totalScore);
         ScoreManager.Instance.UpdateScores(totalScore);
     }

@@ -42,9 +42,9 @@ public class PlayerController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            Score.Instance.CallUpdateScores();
             controller.DeadAnim();
             DeadSet();
-            Score.Instance.CallUpdateScores();
             GameOver();
             SoundManager.Instance.Play("bomb", Sound.Sfx);
         }

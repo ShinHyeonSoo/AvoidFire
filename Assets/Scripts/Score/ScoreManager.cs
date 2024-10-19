@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bestScoreText;
 
     public int curScore;
-    public int highScore;
+    public int highScore = 0;
 
 
     void Awake()
