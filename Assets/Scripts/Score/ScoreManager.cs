@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bestScoreText;
 
     public int curScore;
-    public int highScore;
+    public int highScore = 0;
 
 
     void Awake()
@@ -32,10 +32,19 @@ public class ScoreManager : MonoBehaviour
     public void UpdateScores(int newScore)
     {
         curScore = newScore;
+
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            highScore = PlayerPrefs.GetInt("HighScore", 0);
+        }
+
         if (newScore > highScore)
         {
             highScore = newScore;
         }
+
+        PlayerPrefs.SetInt("HighScore", highScore);
+
         currentScoreText.text = curScore.ToString();
         bestScoreText.text = highScore.ToString();
     }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private bool isDebugingMode = false;
+
     public static GameManager Instance { get; private set; }
     private int score = 0;
-    private bool isGameOver = false;
+    public bool IsGameOver = false;
 
     private void Awake()
     {
@@ -24,14 +26,14 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         score = 0;
-        isGameOver = false;
+        IsGameOver = false;
     }
 
     public void GameOver()
     {
-        if (isGameOver) return;
-
-        isGameOver = true;
+        if (IsGameOver) return;
+        DebugMode();
+        IsGameOver = true;
         UIManager.Instance.ShowGameOver();
     }
 
@@ -43,5 +45,13 @@ public class GameManager : MonoBehaviour
     public int GetScore()
     {
         return score;
+    }
+
+    public void DebugMode()
+    {
+        if (isDebugingMode)
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 }
