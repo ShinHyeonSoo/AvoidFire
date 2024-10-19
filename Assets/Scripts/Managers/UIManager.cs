@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
     public void TweenScreenClose(string sceneName)
     {
         _tweenScreen.Close(sceneName);
-        Time.timeScale = 1f;
+        GameManager.Instance.IsGameOver = false;
     }
 
     IEnumerator CoroutineResume()

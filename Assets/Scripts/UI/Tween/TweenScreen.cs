@@ -46,9 +46,10 @@ public class TweenScreen : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
+        Time.timeScale = 1f;
         _animatorMon.SetTrigger("Start");
         var seq = DOTween.Sequence();
         seq.Append(_rectTrans.DOAnchorPosX(_targetPosX, _duration * 1.5f).SetEase(Ease.OutCirc));
-        seq.Play().SetUpdate(true).OnComplete(() => { SceneManager.LoadScene(sceneName); });
+        seq.Play().SetUpdate(true).OnComplete(() => { SceneManager.LoadSceneAsync(sceneName); });
     }
 }

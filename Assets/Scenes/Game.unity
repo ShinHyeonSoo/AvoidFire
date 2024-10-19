@@ -557,6 +557,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7153617612744318645, guid: 45f8c507ae38e904fa3e7f6fc5192c22, type: 3}
   m_PrefabInstance: {fileID: 711297866}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &711297868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5469118868254542611, guid: 45f8c507ae38e904fa3e7f6fc5192c22, type: 3}
+  m_PrefabInstance: {fileID: 711297866}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d651b2c1f5ea6488dbeb7a31761aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &728916344
 GameObject:
   m_ObjectHideFlags: 0
@@ -3282,7 +3293,7 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   gameOverPanel: {fileID: 7824435703783835563}
   pausePanel: {fileID: 4907714075717411883}
-  _tweenScreen: {fileID: 0}
+  _tweenScreen: {fileID: 711297868}
 --- !u!222 &1414736058156555722
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3802,16 +3813,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6296430465110543904}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlaySFX
+      - m_Target: {fileID: 1392327586455728123}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: TweenScreenClose
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: select
+          m_StringArgument: Title
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1744572270517476511
@@ -4762,16 +4773,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6296430465110543904}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlaySFX
+      - m_Target: {fileID: 1392327586455728123}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: TweenScreenClose
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: select
+          m_StringArgument: Game
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2610292415465085812
@@ -4852,18 +4863,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6296430465110543904}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlaySFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: close
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2612292352505769998
@@ -10406,18 +10405,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6296430465110543904}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlaySFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &3548553588805305828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15379,16 +15366,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6296430465110543904}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlaySFX
+      - m_Target: {fileID: 1392327586455728123}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: TweenScreenClose
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: select
+          m_StringArgument: Game
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &3794382249368588600
@@ -15658,6 +15645,7 @@ GameObject:
   - component: {fileID: 8849852381780035251}
   - component: {fileID: 2418080135237821732}
   - component: {fileID: 2610292415465085812}
+  - component: {fileID: 8849852381780035252}
   m_Layer: 5
   m_Name: BtnClose
   m_TagString: Untagged
@@ -17288,6 +17276,7 @@ GameObject:
   - component: {fileID: 5404569676027379721}
   - component: {fileID: 3132424348631766088}
   - component: {fileID: 1698391063832040926}
+  - component: {fileID: 7233141597395478034}
   m_Layer: 5
   m_Name: BtnTitle
   m_TagString: Untagged
@@ -17381,16 +17370,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6296430465110543904}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlaySFX
+      - m_Target: {fileID: 1392327586455728123}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: TweenScreenClose
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: select
+          m_StringArgument: Title
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6482356395327538827
@@ -17442,6 +17431,7 @@ GameObject:
   - component: {fileID: 1625737141158184732}
   - component: {fileID: 8407128649025116568}
   - component: {fileID: 6397045990703460365}
+  - component: {fileID: 8407128649025116569}
   m_Layer: 5
   m_Name: BtnTitle
   m_TagString: Untagged
@@ -17717,18 +17707,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6296430465110543904}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlaySFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: setting
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &6722314100652452358
@@ -18086,6 +18064,19 @@ RectTransform:
   m_AnchoredPosition: {x: 150, y: 70}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &7233141597395478034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303228111527200450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33193c8acd5af844ba20dc9c89301a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundStr: select
 --- !u!114 &7240871812931624401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18350,6 +18341,7 @@ GameObject:
   - component: {fileID: 3683149825010866231}
   - component: {fileID: 6163403959221488484}
   - component: {fileID: 2608336497987557033}
+  - component: {fileID: 7412067582262062628}
   m_Layer: 5
   m_Name: BtnRetry
   m_TagString: Untagged
@@ -18357,6 +18349,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7412067582262062628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7412067582262062627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33193c8acd5af844ba20dc9c89301a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundStr: select
 --- !u!114 &7413242113652683498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18534,6 +18539,7 @@ GameObject:
   - component: {fileID: 7631621672005997076}
   - component: {fileID: 7805395016027888457}
   - component: {fileID: 3545140012473180815}
+  - component: {fileID: 7805395016027888458}
   m_Layer: 5
   m_Name: BtnOk
   m_TagString: Untagged
@@ -18757,6 +18763,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7805395016027888458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635186924728162093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33193c8acd5af844ba20dc9c89301a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundStr: click
 --- !u!1 &7815370503630718940
 GameObject:
   m_ObjectHideFlags: 0
@@ -19070,6 +19089,7 @@ GameObject:
   - component: {fileID: 871035203367740562}
   - component: {fileID: 8034202721816472685}
   - component: {fileID: 6702757523302639347}
+  - component: {fileID: 8159700624083357911}
   m_Layer: 5
   m_Name: BtnPause
   m_TagString: Untagged
@@ -19077,6 +19097,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8159700624083357911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159700624083357910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33193c8acd5af844ba20dc9c89301a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundStr: setting
 --- !u!1 &8191735578975653454
 GameObject:
   m_ObjectHideFlags: 0
@@ -19089,6 +19122,7 @@ GameObject:
   - component: {fileID: 5964546099670966202}
   - component: {fileID: 7424760307082878958}
   - component: {fileID: 3790661242995613174}
+  - component: {fileID: 8191735578975653455}
   m_Layer: 5
   m_Name: BtnRetry
   m_TagString: Untagged
@@ -19096,6 +19130,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8191735578975653455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191735578975653454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33193c8acd5af844ba20dc9c89301a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundStr: select
 --- !u!114 &8280749269936128560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19258,6 +19305,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8407128649025116569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6537885220350002890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33193c8acd5af844ba20dc9c89301a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundStr: select
 --- !u!224 &8414676227276486530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24500,6 +24560,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3933863206545804615}
   m_CullTransparentMesh: 1
+--- !u!114 &8849852381780035252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933863206545804615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33193c8acd5af844ba20dc9c89301a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundStr: close
 --- !u!224 &8855035803553267388
 RectTransform:
   m_ObjectHideFlags: 0
