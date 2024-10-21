@@ -961,6 +961,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3258722053673560947, guid: 858aeda0ebedc7e4b8e82aa1f8ccfdda, type: 3}
+      propertyPath: m_Text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258722053673560947, guid: 858aeda0ebedc7e4b8e82aa1f8ccfdda, type: 3}
       propertyPath: m_Color.b
       value: 0.20225172
       objectReference: {fileID: 0}
@@ -976,6 +980,14 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 16d526ae6bd9ec641b5577910bbada7e, type: 3}
+    - target: {fileID: 3258722053673560947, guid: 858aeda0ebedc7e4b8e82aa1f8ccfdda, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258722053673560947, guid: 858aeda0ebedc7e4b8e82aa1f8ccfdda, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 7976367998431089726, guid: 858aeda0ebedc7e4b8e82aa1f8ccfdda, type: 3}
       propertyPath: m_Name
       value: ScoreCanvas
@@ -17386,7 +17398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3764214dd83af0443b8f86cce309b4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 0}
   _type: 0
 --- !u!114 &7352658758757817326
 MonoBehaviour:
@@ -23592,7 +23603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3764214dd83af0443b8f86cce309b4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 0}
   _type: 1
 --- !u!114 &9004338661705834612
 MonoBehaviour:

@@ -21,6 +21,7 @@ public class SelectCharacterEffect : MonoBehaviour
     public void Select()
     {
         animator.SetBool("isSelect", true);
+        SoundManager.Instance.Play("click", Sound.Sfx);
     }
 
     public void NotSelect()
