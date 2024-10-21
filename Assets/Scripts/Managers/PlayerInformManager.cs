@@ -27,12 +27,6 @@ public class PlayerInformManager : MonoBehaviour
         inputInform = GetComponent<InputPlayerInform>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void GameStart()
     {
         if(playerId != -1)

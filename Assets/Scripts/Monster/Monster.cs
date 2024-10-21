@@ -9,7 +9,6 @@ public class Monster : MonoBehaviour
     float knockback = 3; // Æ¨°Ü³ª°¥ Á¤µµ
     float knockbackpower = 2; // Æ¨°Ü³ª°¥ Èû
     public float speed;
-    bool isEffectActive = false;
 
     MonsterSpawn monsterSpawn;
 

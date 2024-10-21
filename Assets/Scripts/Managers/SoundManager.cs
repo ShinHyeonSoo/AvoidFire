@@ -13,9 +13,6 @@ public class SoundManager : MonoBehaviour
 {
     private static SoundManager _instance;
 
-    [SerializeField] private Slider _sliderBgm;
-    [SerializeField] private Slider _sliderSfx;
-
     private AudioSource[] _audioSources = new AudioSource[(int)Sound.Max];
     private Dictionary<string, AudioClip> _audioClipDic = new Dictionary<string, AudioClip>();
 
@@ -128,10 +125,6 @@ public class SoundManager : MonoBehaviour
         }
         else // Sfx 효과음 재생
         {
-            //AudioSource audioSource = _audioSources[(int)Sound.Sfx];
-            //audioSource.volume = SfxVolume * volume;
-            //audioSource.PlayOneShot(audioClip);
-
             var obj = _sfxPool.SpawnFromPool("audiosource");
             obj.GetComponent<AudioSource>().volume = SfxVolume * volume;
             obj.GetComponent<AudioSource>().PlayOneShot(audioClip);
@@ -155,10 +148,6 @@ public class SoundManager : MonoBehaviour
         }
         else // Sfx 효과음 재생
         {
-            //AudioSource audioSource = _audioSources[(int)Sound.Sfx];
-            //audioSource.volume = SfxVolume * volume;
-            //audioSource.PlayOneShot(_audioClipDic[audioName]);
-
             var obj = _sfxPool.SpawnFromPool("audiosource");
             obj.GetComponent<AudioSource>().volume = SfxVolume * volume;
             obj.GetComponent<AudioSource>().PlayOneShot(_audioClipDic[audioName]);
@@ -175,15 +164,6 @@ public class SoundManager : MonoBehaviour
         AudioSource audioSource = _audioSources[(int)Sound.Sfx];
         audioSource.volume = SfxVolume;
         audioSource.PlayOneShot(_audioClipDic[name]);
-    }
-
-    public void SetVolume()
-    {
-        BgmVolume = _sliderBgm.value;
-        SfxVolume = _sliderSfx.value;
-
-        _audioSources[(int)Sound.Bgm].volume = BgmVolume;
-        _audioSources[(int)Sound.Sfx].volume = SfxVolume;
     }
 
     public void SetVolume(int type, GameObject obj)
@@ -206,9 +186,7 @@ public class SoundManager : MonoBehaviour
     public void InitVolume(float bgm, float sfx)
     {
         BgmVolume = bgm;
-        //_sliderBgm.value = BgmVolume;
         SfxVolume = sfx;
-        //_sliderSfx.value = SfxVolume;
     }
 
     public void InitSlider(int type, GameObject obj)

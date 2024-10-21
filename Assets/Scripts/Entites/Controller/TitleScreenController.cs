@@ -6,7 +6,7 @@ public class TitleScreenController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer titleSpriteRenderer;
     [SerializeField] private float blinkSpeed = 1f;
-    [SerializeField] private string characterSelectionSceneName = "CharacterSelect";  // TODO:: 캐릭터 선택 씬으로 수정할것
+    [SerializeField] private string characterSelectionSceneName = "CharacterSelect";
     [SerializeField] private TweenScreen tweenScreen;
     private bool isBlinking = true;
 

@@ -65,7 +65,6 @@ public class RandomEffectManager : MonoBehaviour
                 StartCoroutine(AutoModeTimer());
                 _effectObj = EffectManager.Instance.FollowEffect("super", player.gameObject);
                 SoundManager.Instance.Play("super", Sound.Sfx);
-                // TODO : ±âÂù
                 break;
         }
     }

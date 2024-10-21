@@ -57,7 +57,6 @@ public class FireProjectile : MonoBehaviour
 
         if (collisionTagHash == groundTagHash)
         {
-            // TODO : 땅과 불 충돌
             Score.Instance.AddScore(score);
             CreateEffect(collision);
             Destroy(gameObject);

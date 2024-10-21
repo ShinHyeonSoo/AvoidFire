@@ -21,7 +21,6 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -34,7 +33,6 @@ public class UIManager : MonoBehaviour
         tweenButton = GetComponent<TweenButton>();
         gameOverPanel.SetActive(false);
         pausePanel.SetActive(false);
-        //UpdateScore(0);
 
         SoundManager.Instance.Play("game", Sound.Bgm);
     }

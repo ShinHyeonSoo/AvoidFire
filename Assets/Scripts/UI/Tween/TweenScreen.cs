@@ -13,7 +13,6 @@ public class TweenScreen : MonoBehaviour
     private float _targetPosX = 0;
     private float _duration = 1f;
 
-    // Start is called before the first frame update
     void Start()
     {
         DOTween.Init();
