@@ -7,15 +7,9 @@ public class FireSpawner : MonoBehaviour
     [SerializeField] private float spawnInterval = 0.3f;
     [SerializeField] private float spawnXMin = -9f;
     [SerializeField] private float spawnXMax = 9f;
-    [SerializeField] private int score; //일단 점수
     [SerializeField] private Transform spawnPoint;
 
     private int checkScore = 100;
-
-    Rigidbody2D rb2D;
-
-    private FireProjectile fire;
-
     private void Start()
     {
         StartCoroutine(SpawnFire());
@@ -28,9 +22,8 @@ public class FireSpawner : MonoBehaviour
             SetFire();
             yield return new WaitForSeconds(spawnInterval);
 
-            if (score > checkScore) //100점단위일때만 계산
+            if (Score.Instance.totalScore >= checkScore) //100점단위일때만 계산
             {
-                Difficultylevel();
                 checkScore += 100;
             }
         }
@@ -40,12 +33,12 @@ public class FireSpawner : MonoBehaviour
     {
         GameObject fire = Instantiate(firePrefab, spawnPoint.position, Quaternion.Euler(0, 0, 180));
         Rigidbody2D rb2D = fire.GetComponent<Rigidbody2D>();
+        FireProjectile fireProjectile = fire.GetComponent<FireProjectile>();
         float randomXPosition = Random.Range(spawnXMin, spawnXMax);
         fire.transform.position = new Vector2(randomXPosition, spawnPoint.position.y);
         int randomType = Random.Range(1, 5);
         float size = 1.5f;
  
-
         switch (randomType)
         {
             case 1:
@@ -61,32 +54,42 @@ public class FireSpawner : MonoBehaviour
                 size = 8f;
                 break;
         }
-        //볼 크기설정
+        fire.transform.SetParent(transform);
         fire.transform.localScale = new Vector2(size, size);
+        Difficultylevel(fireProjectile, rb2D);
     }
-
-    public void Difficultylevel()
+     void Difficultylevel(FireProjectile fireProjectile, Rigidbody2D rb2D)
     {
-        if (score >= 100)
-        {
-            spawnInterval = 0.25f;
-        }
-        if (score >= 200)
-        {
-            spawnInterval = 0.2f;
-            fire.FallSpeed = 7f;
-            rb2D.gravityScale = 2f;
-        }
-        if (score >= 300)
-        {
-            spawnInterval = 0.15f;
-            fire.FallSpeed = 9f;
-        }
-        if (score >= 500)
+        if (Score.Instance.totalScore >= 1000)
         {
             spawnInterval = 0.1f;
-            fire.FallSpeed = 12f;
+            fireProjectile.FallSpeed = 15;
+            rb2D.gravityScale = 4f;
+        }
+        else if (Score.Instance.totalScore >= 700)
+        {
+            spawnInterval = 0.14f;
+            fireProjectile.FallSpeed = 10f;
             rb2D.gravityScale = 3f;
         }
+        else if (Score.Instance.totalScore >= 500)
+        {
+            spawnInterval = 0.18f;
+            fireProjectile.FallSpeed = 8f;
+            rb2D.gravityScale = 2.5f;
+        }
+        else if (Score.Instance.totalScore >= 300)
+        {
+            spawnInterval = 0.22f;
+            fireProjectile.FallSpeed = 7f;
+            rb2D.gravityScale = 2f;
+        }
+        else if (Score.Instance.totalScore >= 100)
+        {
+            spawnInterval = 0.26f;
+            fireProjectile.FallSpeed = 6f;
+            rb2D.gravityScale = 1.5f;
+        }
     }
+
 }

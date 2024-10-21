@@ -20,6 +20,7 @@ public class RandomEffectManager : MonoBehaviour
 
     private GameObject _effectObj;
 
+    public int randomEffect;
     private void Awake()
     {
         GameObject playerObject = GameObject.Find("Player");
@@ -37,7 +38,7 @@ public class RandomEffectManager : MonoBehaviour
 
     public void ApplyRandomEffect()
     {
-        int randomEffect = 4;//Random.Range(1, 5);
+        randomEffect = 4;//Random.Range(1, 5);
 
         switch (randomEffect)
         {
@@ -158,5 +159,6 @@ public class RandomEffectManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
         effectMessageText.gameObject.SetActive(false);
+        randomEffect = 0; // 끝나면 초기화
     }
 }
