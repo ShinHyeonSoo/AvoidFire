@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
         // 땅에 착지 할 때까지 기다림
         while (!movement.isGrounded)
         {
-            Debug.Log(movement.isGrounded);
             yield return null; // 한 프레임 대기
         }
 

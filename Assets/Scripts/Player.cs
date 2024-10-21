@@ -13,30 +13,12 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        
         isDead = false;
         animator = GetComponent<Animator>();
-        // ------- 테스트 끝나면 삭제 -------
-        speed = 10f;
-        jumpPower = 10f;
-        HP = 3;
-        animator.runtimeAnimatorController = animatorControllers[1];
-        // ------- 테스트 끝나면 삭제 -------
+        
         if(PlayerInformManager.instance != null)
             SetPlayer(PlayerInformManager.instance.playerId);
-    }
-
-    void Start()
-    {
-    }
-
-    private void OnEnable()
-    {
-    }
-
-    public void ChangeAnimController()
-    {
-        // animator.runtimeAnimatorController = animatorControllers[GameManager.instance.playerId];
-        // 애니메이터 컨트롤러를 현재 선택된 playerId에 맞는 걸로 바꿈
     }
 
     private void SetPlayer(int playerID)
