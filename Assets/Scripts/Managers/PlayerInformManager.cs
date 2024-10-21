@@ -43,6 +43,7 @@ public class PlayerInformManager : MonoBehaviour
         {
             warningImage.gameObject.SetActive(true);
         }
+        SoundManager.Instance.Play("select", Sound.Sfx);
     }
 
     public void SetId(int id)

@@ -62,7 +62,7 @@ public class SoundManager : MonoBehaviour
             _audioSources[i] = go.AddComponent<AudioSource>();
             go.transform.parent = transform;
         }
-        InitVolume(0.3f, 0.3f);
+        InitVolume(0.5f, 0.5f);
         _audioSources[(int)Sound.Bgm].loop = true; // bgm 재생기는 무한 반복 재생
         _sfxPool = GetComponent<ObjectPool>();
 
@@ -186,11 +186,36 @@ public class SoundManager : MonoBehaviour
         _audioSources[(int)Sound.Sfx].volume = SfxVolume;
     }
 
+    public void SetVolume(int type, GameObject obj)
+    {
+        Slider slider = obj.GetComponent<Slider>();
+
+        if ((int)Sound.Bgm == type)
+        {
+            BgmVolume = slider.value;
+            _audioSources[(int)Sound.Bgm].volume = BgmVolume;
+
+        }
+        else if ((int)Sound.Sfx == type)
+        {
+            SfxVolume = slider.value;
+            _audioSources[(int)Sound.Sfx].volume = SfxVolume;
+        }
+    }
+
     public void InitVolume(float bgm, float sfx)
     {
         BgmVolume = bgm;
-        _sliderBgm.value = BgmVolume;
+        //_sliderBgm.value = BgmVolume;
         SfxVolume = sfx;
-        _sliderSfx.value = SfxVolume;
+        //_sliderSfx.value = SfxVolume;
+    }
+
+    public void InitSlider(int type, GameObject obj)
+    {
+        if ((int)Sound.Bgm == type)
+            obj.GetComponent<Slider>().value = BgmVolume;
+        else if ((int)Sound.Sfx == type)
+            obj.GetComponent<Slider>().value = SfxVolume;
     }
 }

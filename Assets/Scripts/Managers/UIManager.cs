@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
         pausePanel.SetActive(false);
         //UpdateScore(0);
 
-        SoundManager.Instance.Play("bgm_blues_guitar1", Sound.Bgm);
+        SoundManager.Instance.Play("game", Sound.Bgm);
     }
 
     public void UpdateScore(int score)
