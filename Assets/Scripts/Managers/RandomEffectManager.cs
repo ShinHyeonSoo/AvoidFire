@@ -38,7 +38,7 @@ public class RandomEffectManager : MonoBehaviour
 
     public void ApplyRandomEffect()
     {
-        randomEffect = 4;//Random.Range(1, 5);
+        randomEffect = Random.Range(1, 5);
 
         switch (randomEffect)
         {
