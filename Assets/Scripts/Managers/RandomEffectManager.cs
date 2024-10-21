@@ -19,8 +19,9 @@ public class RandomEffectManager : MonoBehaviour
     [SerializeField] private float avoidFireDuration = 10f;
 
     private GameObject _effectObj;
-
     public int randomEffect;
+    public int randomCount = 2;
+
     private void Awake()
     {
         GameObject playerObject = GameObject.Find("Player");
@@ -38,7 +39,9 @@ public class RandomEffectManager : MonoBehaviour
 
     public void ApplyRandomEffect()
     {
-        randomEffect = Random.Range(1, 5);
+        //randomEffect = Random.Range(1, 5);
+        ++randomCount;
+        randomEffect = (randomCount % 4) + 1;
 
         switch (randomEffect)
         {

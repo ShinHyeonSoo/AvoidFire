@@ -16248,7 +16248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closedBoxPrefab: {fileID: 8530266048858749746, guid: 17ad8e14851f77e4ea789b4b7833ca37, type: 3}
-  spawnInterval: 30
+  spawnInterval: 10
   spawnXMin: -6
   spawnXMax: 8
   spawnPoint: {fileID: 9054276170922628758}
@@ -17464,7 +17464,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &7412067582262062627
 GameObject:

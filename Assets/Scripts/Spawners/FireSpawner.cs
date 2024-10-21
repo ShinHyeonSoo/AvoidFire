@@ -70,31 +70,31 @@ public class FireSpawner : MonoBehaviour
     }
      void Difficultylevel(FireProjectile fireProjectile, Rigidbody2D rb2D)
     {
-        if (Score.Instance.totalScore >= 1000)
+        if (Score.Instance.totalScore >= 250)
         {
             spawnInterval = 0.1f;
             fireProjectile.FallSpeed = 15;
             rb2D.gravityScale = 4f;
         }
-        else if (Score.Instance.totalScore >= 700)
+        else if (Score.Instance.totalScore >= 200)
         {
             spawnInterval = 0.14f;
             fireProjectile.FallSpeed = 10f;
             rb2D.gravityScale = 3f;
         }
-        else if (Score.Instance.totalScore >= 500)
+        else if (Score.Instance.totalScore >= 150)
         {
             spawnInterval = 0.18f;
             fireProjectile.FallSpeed = 8f;
             rb2D.gravityScale = 2.5f;
         }
-        else if (Score.Instance.totalScore >= 300)
+        else if (Score.Instance.totalScore >= 100)
         {
             spawnInterval = 0.22f;
             fireProjectile.FallSpeed = 7f;
             rb2D.gravityScale = 2f;
         }
-        else if (Score.Instance.totalScore >= 100)
+        else if (Score.Instance.totalScore >= 50)
         {
             spawnInterval = 0.26f;
             fireProjectile.FallSpeed = 6f;

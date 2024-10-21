@@ -4,7 +4,7 @@ using UnityEngine;
 public class RandomBoxSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject closedBoxPrefab;
-    [SerializeField] private float spawnInterval = 30f;
+    [SerializeField] private float spawnInterval = 10f;
     [SerializeField] private float spawnXMin = -6f;
     [SerializeField] private float spawnXMax = 8f;
     [SerializeField] private Transform spawnPoint;

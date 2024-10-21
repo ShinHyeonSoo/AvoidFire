@@ -16,9 +16,16 @@ public class PlayerInformManager : MonoBehaviour
     public Transform PlayerTransform { get; private set; } // 플레이어 transform
 
     private void Awake()
-    { 
-        if (instance != null) Destroy(gameObject);
-        instance = this;
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+        
         playerId = -1;
     }
 
