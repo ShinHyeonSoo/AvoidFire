@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FireSpawner : MonoBehaviour
 {
@@ -21,10 +22,12 @@ public class FireSpawner : MonoBehaviour
         {
             SetFire();
             yield return new WaitForSeconds(spawnInterval);
-
-            if (Score.Instance.totalScore >= checkScore) //100점단위일때만 계산
+            if (Score.Instance != null)
             {
-                checkScore += 100;
+                if (Score.Instance.totalScore >= checkScore) //100점단위일때만 계산
+                {
+                    checkScore += 100;
+                }
             }
         }
     }
@@ -56,7 +59,14 @@ public class FireSpawner : MonoBehaviour
         }
         fire.transform.SetParent(transform);
         fire.transform.localScale = new Vector2(size, size);
-        Difficultylevel(fireProjectile, rb2D);
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            TitleFireSetting(fireProjectile, rb2D);
+        }
+        else
+        {
+            Difficultylevel(fireProjectile, rb2D);
+        }
     }
      void Difficultylevel(FireProjectile fireProjectile, Rigidbody2D rb2D)
     {
@@ -92,4 +102,10 @@ public class FireSpawner : MonoBehaviour
         }
     }
 
+    private void TitleFireSetting(FireProjectile fireProjectile, Rigidbody2D rb2D)
+    {
+        spawnInterval = 0.26f;
+        fireProjectile.FallSpeed = 6f;
+        rb2D.gravityScale = 1.5f;
+    }
 }

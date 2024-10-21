@@ -2625,7 +2625,6 @@ MonoBehaviour:
   spawnInterval: 0.3
   spawnXMin: -9
   spawnXMax: 9
-  score: 0
   spawnPoint: {fileID: 3179754496475725534, guid: 2897e32dd971f3f4a8a428835521ed07, type: 3}
 --- !u!224 &526691316760498721
 RectTransform:
@@ -15461,6 +15460,7 @@ MonoBehaviour:
   effectMessageText: {fileID: 1253690508}
   messageDisplayTime: 2
   avoidFireDuration: 10
+  randomEffect: 0
 --- !u!222 &4472824664997280443
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16248,7 +16248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closedBoxPrefab: {fileID: 8530266048858749746, guid: 17ad8e14851f77e4ea789b4b7833ca37, type: 3}
-  spawnInterval: 5
+  spawnInterval: 30
   spawnXMin: -6
   spawnXMax: 8
   spawnPoint: {fileID: 9054276170922628758}
