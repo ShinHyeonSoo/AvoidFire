@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AvoidFireMovement : MonoBehaviour
 {
@@ -35,6 +32,11 @@ public class AvoidFireMovement : MonoBehaviour
         // rigidebody의 값을 바꾸니까 FixedUpdate
         ApplyMovement(movementDirection);
 
+        if (!isGrounded)
+        {
+            ApplyBetterJumpPhysics(); // 향상된 중력 적용 함수 호출
+        }
+
     }
 
     private void Move(Vector2 direction)
@@ -48,21 +50,32 @@ public class AvoidFireMovement : MonoBehaviour
     {
         if (isGrounded && isJump)
         {
-            // TODO : 점프 높이 테스트 해서 결정
-            movementRigidbody.AddForce(new Vector2(0, player.jumpPower), ForceMode2D.Impulse); // 점프 힘 설정
+            // X축 방향도 영향을 주도록 Vector2에 X축 방향 추가
+            Vector2 jumpDirection = new Vector2(movementDirection.x * player.speed * 10 , player.jumpPower);
+            movementRigidbody.AddForce(jumpDirection, ForceMode2D.Impulse); // 점프 힘 설정
             isGrounded = false; // 점프 후에는 공중 상태로 설정
             SoundManager.Instance.Play("jump", Sound.Sfx, 0.5f);
         }
     }
 
+
     private void ApplyMovement(Vector2 direction)
     {
         Vector2 velocity = movementRigidbody.velocity;
-        velocity.x = direction.x * player.speed;
 
-        movementRigidbody.velocity = velocity;
+        // 지면에 있을 때와 공중에 있을 때의 X축 속도 처리
+        if (isGrounded)
+        {
+            velocity.x = direction.x * player.speed; // 지면에서의 X축 속도
+        }
+        else
+        {
+            // 공중에 있을 때 X축 속도 유지 (air control)
+            velocity.x = direction.x * (player.speed / 3) * 2; // 공중 제어 속도 설정
+        }
 
-        Flip(direction);
+        movementRigidbody.velocity = velocity; // 속도 적용
+        Flip(direction); // 캐릭터 방향 전환
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -73,6 +86,19 @@ public class AvoidFireMovement : MonoBehaviour
             isGrounded = true;
         }
     }
+
+    private void ApplyBetterJumpPhysics()
+    {
+        if (movementRigidbody.velocity.y < 0) // 하강 중일 때
+        {
+            movementRigidbody.gravityScale *= 1.06f; // 하강 중에는 강한 중력
+        }
+        else
+        {
+            movementRigidbody.gravityScale = 3f;
+        }
+    }
+
     private void Flip(Vector2 direction)
     {
         if (!player.isDead)

@@ -16,6 +16,7 @@ public class TitleScreenController : MonoBehaviour
     {
         IsTween = false;
         StartCoroutine(BlinkImage());
+        SoundManager.Instance.Play("title", Sound.Bgm);
     }
 
     private void Update()
@@ -24,6 +25,7 @@ public class TitleScreenController : MonoBehaviour
         {
             StopCoroutine(BlinkImage());
             tweenScreen.Close(characterSelectionSceneName);
+            SoundManager.Instance.Play("select", Sound.Sfx);
         }
     }
 

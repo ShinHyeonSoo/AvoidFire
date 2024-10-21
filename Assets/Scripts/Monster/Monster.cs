@@ -30,12 +30,16 @@ public class Monster : MonoBehaviour
         {
             gameObject.SetActive(false);
             Score.Instance.AddScore(10);
+            SoundManager.Instance.Play("sfx_coin", Sound.Sfx);
+            EffectManager.Instance.ShotEffect("explosion", transform.position);
         }
 
         if (transform.position.x > maxX)
         {
             gameObject.SetActive(false);
-            Score.Instance.AddScore(10); 
+            Score.Instance.AddScore(10); // 점수올라가는지 확인
+            SoundManager.Instance.Play("sfx_coin", Sound.Sfx);
+            EffectManager.Instance.ShotEffect("explosion", transform.position);
         }
         if (monsterRenderer.flipX)
             transform.Translate(Vector3.left * speed * Time.deltaTime);
@@ -57,6 +61,8 @@ public class Monster : MonoBehaviour
         {
             float dirX = transform.position.x - collision.transform.position.x > 0 ? (knockback) : -(knockbackpower);
             rb2d.AddForce(new Vector2(dirX, (knockback)) * (knockbackpower), ForceMode2D.Impulse);
+            SoundManager.Instance.Play("collision", Sound.Sfx, 0.5f);
+            EffectManager.Instance.ShotEffect("hit", transform.position);
         }
     }
 
