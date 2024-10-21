@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private HealthUIManager healthUIManager;
     private SpriteRenderer _spriteRenderer;
     AvoidFireAnimationController controller;
+    AvoidFireMovement movement;
 
 
     private void Awake()
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         player = GetComponent<Player>();
         controller = GetComponent<AvoidFireAnimationController>();
+        movement = GetComponent<AvoidFireMovement>();
     }
 
     private void Start()
@@ -33,17 +36,13 @@ public class PlayerController : MonoBehaviour
     {
         if (isActiveShield == false)
         {
-            Debug.Log(currentHealth);
             currentHealth--;
-
-            Debug.Log(currentHealth);
             healthUIManager.UpdateHealthUI(currentHealth);
         }
 
         if (currentHealth <= 0)
         {
             Score.Instance.CallUpdateScores();
-            controller.DeadAnim();
             DeadSet();
             GameOver();
             SoundManager.Instance.Play("bomb", Sound.Sfx);
@@ -52,9 +51,10 @@ public class PlayerController : MonoBehaviour
         {
             SoundManager.Instance.Play("damage", Sound.Sfx);
             EffectManager.Instance.ShotEffect("hurt", transform.position);
+            controller.HitAnim();
         }
 
-        controller.HitAnim();
+        
     }
 
     public void TakeHeal()
@@ -77,10 +77,18 @@ public class PlayerController : MonoBehaviour
 
     private void DeadSet()
     {
-        Collider2D playerCollider = playerObject.GetComponent<Collider2D>();
-        if (playerCollider != null)
+        controller.DeadAnim();
+
+        StartCoroutine(WaitForGrounded());
+    }
+
+    IEnumerator WaitForGrounded()
+    {
+        // 땅에 착지 할 때까지 기다림
+        while (!movement.isGrounded)
         {
-            playerCollider.enabled = false;  // 콜라이더 비활성화
+            Debug.Log(movement.isGrounded);
+            yield return null; // 한 프레임 대기
         }
 
         Rigidbody2D playerRigidbody = playerObject.GetComponent<Rigidbody2D>();
@@ -89,8 +97,14 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         }
 
+        Collider2D playerCollider = playerObject.GetComponent<Collider2D>();
+        if (playerCollider != null)
+        {
+            playerCollider.enabled = false;
+        }
+
         _spriteRenderer.flipX = false;
         player.isDead = true;
     }
-    
+
 }
