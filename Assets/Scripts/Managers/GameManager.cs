@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private bool isDebugingMode = false;
+
     public static GameManager Instance { get; private set; }
     private int score = 0;
-    private bool isGameOver = false;
-
-    public DataManager _dataManager; // GetComponent 지웠습니다. 사용시 다시 설정해주세요.
+    public bool IsGameOver = false;
 
     private void Awake()
     {
@@ -26,18 +26,15 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         score = 0;
-        isGameOver = false;
+        IsGameOver = false;
     }
 
     public void GameOver()
     {
-        isGameOver = true;
-        //TODO :: 게임 오버 처리
-    }
-
-    public void RestartGame()
-    {
-        //TODO :: 게임 재시작 로직
+        if (IsGameOver) return;
+        DebugMode();
+        IsGameOver = true;
+        UIManager.Instance.ShowGameOver();
     }
 
     public void AddScore(int points)
@@ -48,5 +45,13 @@ public class GameManager : MonoBehaviour
     public int GetScore()
     {
         return score;
+    }
+
+    public void DebugMode()
+    {
+        if (isDebugingMode)
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 }

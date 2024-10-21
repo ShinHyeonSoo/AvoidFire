@@ -1,44 +1,48 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class AvoidFireMovement : MonoBehaviour
 {
-    private AvoidFireController movementController;
+    private AvoidFireController controller;
     private Rigidbody2D movementRigidbody;
     private Player player;
+    private SpriteRenderer spriteRenderer;
 
     private Vector2 movementDirection = Vector2.zero;
-    private bool isGrounded = true;
+    public bool isGrounded = true;
 
     private void Awake()
     {
-        movementController = GetComponent<AvoidFireController>();
+        controller = GetComponent<AvoidFireController>();
         movementRigidbody = GetComponent<Rigidbody2D>();
-        player = GetComponent<Player>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        movementController.OnMoveEvent += Move;
-        movementController.OnJumpEvent += Jump;
+        controller.OnMoveEvent += Move;
+        controller.OnJumpEvent += Jump;
     }
 
     void Start()
     {
+        player = GetComponent<Player>();
     }
 
     private void FixedUpdate()
     {
-        // ¹°¸® ¾÷µ¥ÀÌÆ®¿¡¼­ ¿òÁ÷ÀÓ Àû¿ë
-        // FixedUpdate´Â ¹°¸®¾÷µ¥ÀÌÆ® °ü·Ã
-        // rigidebodyÀÇ °ªÀ» ¹Ù²Ù´Ï±î FixedUpdate
+        // ë¬¼ë¦¬ ì—…ë°ì´íŠ¸ì—ì„œ ì›€ì§ì„ ì ìš©
+        // FixedUpdateëŠ” ë¬¼ë¦¬ì—…ë°ì´íŠ¸ ê´€ë ¨
+        // rigidebodyì˜ ê°’ì„ ë°”ê¾¸ë‹ˆê¹Œ FixedUpdate
         ApplyMovement(movementDirection);
+
+        if (!isGrounded)
+        {
+            ApplyBetterJumpPhysics(); // í–¥ìƒëœ ì¤‘ë ¥ ì ìš© í•¨ìˆ˜ í˜¸ì¶œ
+        }
 
     }
 
     private void Move(Vector2 direction)
     {
-        // ÀÌµ¿¹æÇâ¸¸ Á¤ÇØµÎ°í ½ÇÁ¦·Î ¿òÁ÷ÀÌÁö´Â ¾ÊÀ½.
-        // ¿òÁ÷ÀÌ´Â °ÍÀº ¹°¸® ¾÷µ¥ÀÌÆ®¿¡¼­ ÁøÇà(rigidbody°¡ ¹°¸®´Ï±î)
+        // ì´ë™ë°©í–¥ë§Œ ì •í•´ë‘ê³  ì‹¤ì œë¡œ ì›€ì§ì´ì§€ëŠ” ì•ŠìŒ.
+        // ì›€ì§ì´ëŠ” ê²ƒì€ ë¬¼ë¦¬ ì—…ë°ì´íŠ¸ì—ì„œ ì§„í–‰(rigidbodyê°€ ë¬¼ë¦¬ë‹ˆê¹Œ)
         movementDirection = direction;
     }
 
@@ -46,25 +50,63 @@ public class AvoidFireMovement : MonoBehaviour
     {
         if (isGrounded && isJump)
         {
-            // TODO : Á¡ÇÁ ³ôÀÌ Å×½ºÆ® ÇØ¼­ °áÁ¤
-            movementRigidbody.AddForce(new Vector2(0, 300f)); // Á¡ÇÁ Èû ¼³Á¤
-            isGrounded = false; // Á¡ÇÁ ÈÄ¿¡´Â °øÁß »óÅÂ·Î ¼³Á¤
+            // Xì¶• ë°©í–¥ë„ ì˜í–¥ì„ ì£¼ë„ë¡ Vector2ì— Xì¶• ë°©í–¥ ì¶”ê°€
+            Vector2 jumpDirection = new Vector2(movementDirection.x * player.speed * 10 , player.jumpPower);
+            movementRigidbody.AddForce(jumpDirection, ForceMode2D.Impulse); // ì í”„ í˜ ì„¤ì •
+            isGrounded = false; // ì í”„ í›„ì—ëŠ” ê³µì¤‘ ìƒíƒœë¡œ ì„¤ì •
+            SoundManager.Instance.Play("jump", Sound.Sfx, 0.5f);
         }
     }
 
+
     private void ApplyMovement(Vector2 direction)
     {
-        direction = direction * 10f;
+        Vector2 velocity = movementRigidbody.velocity;
 
-        movementRigidbody.velocity = direction;
+        // ì§€ë©´ì— ìˆì„ ë•Œì™€ ê³µì¤‘ì— ìˆì„ ë•Œì˜ Xì¶• ì†ë„ ì²˜ë¦¬
+        if (isGrounded)
+        {
+            velocity.x = direction.x * player.speed; // ì§€ë©´ì—ì„œì˜ Xì¶• ì†ë„
+        }
+        else
+        {
+            // ê³µì¤‘ì— ìˆì„ ë•Œ Xì¶• ì†ë„ ìœ ì§€ (air control)
+            velocity.x = direction.x * (player.speed / 3) * 2; // ê³µì¤‘ ì œì–´ ì†ë„ ì„¤ì •
+        }
+
+        movementRigidbody.velocity = velocity; // ì†ë„ ì ìš©
+        Flip(direction); // ìºë¦­í„° ë°©í–¥ ì „í™˜
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // ¶¥¿¡ ´ê¾ÒÀ» ¶§ isGrounded¸¦ true·Î ¼³Á¤
-        if (collision.gameObject.CompareTag("Ground")) // Ground¶ó´Â ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®¿¡ ´êÀ¸¸é
+        // ë•…ì— ë‹¿ì•˜ì„ ë•Œ isGroundedë¥¼ trueë¡œ ì„¤ì •
+        if (collision.gameObject.CompareTag("Ground")) // Groundë¼ëŠ” íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ì— ë‹¿ìœ¼ë©´
         {
             isGrounded = true;
+        }
+    }
+
+    private void ApplyBetterJumpPhysics()
+    {
+        if (movementRigidbody.velocity.y < 0) // í•˜ê°• ì¤‘ì¼ ë•Œ
+        {
+            movementRigidbody.gravityScale *= 1.06f; // í•˜ê°• ì¤‘ì—ëŠ” ê°•í•œ ì¤‘ë ¥
+        }
+        else
+        {
+            movementRigidbody.gravityScale = 3f;
+        }
+    }
+
+    private void Flip(Vector2 direction)
+    {
+        if (!player.isDead)
+        {
+            if (direction.x > 0)
+                spriteRenderer.flipX = false;
+            else if (direction.x < 0)
+                spriteRenderer.flipX = true;
         }
     }
 }

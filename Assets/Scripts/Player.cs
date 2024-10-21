@@ -1,30 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+癤퓎sing UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float playerSpeed;
-    public int HP;
-
     public RuntimeAnimatorController[] animatorControllers;
     public Animator animator;
 
-    void Start()
+    public string _name;
+    public float speed;
+    public float jumpPower;
+    public int HP;
+    public bool isDead;
+
+    private void Awake()
     {
+        
+        isDead = false;
         animator = GetComponent<Animator>();
-        // TODO : 추후 수정 각캐릭에 맞는 스탯을 받아오도록
+        
+        if(PlayerInformManager.instance != null)
+            SetPlayer(PlayerInformManager.instance.playerId);
     }
 
-    private void OnEnable()
+    private void SetPlayer(int playerID)
     {
-        // 플레이이어 아이디(캐릭터타입)에따라 애니메이터 선택하는 코드
-        // animator.runtimeAnimatorController = animatorControllers[GameManager.instance.playerId];
-    }
+        _name = PlayerInformManager.instance.playerName;
+        if (playerID == 0)
+        {
+            speed = 7f;
+            jumpPower = 9f;
+            HP = 5;
+        }
+        else if (playerID == 1)
+        {
+            speed = 10f;
+            jumpPower = 10f;
+            HP = 3;
+        }
 
-    public void ChangeAnimController()
-    {
-        // animator.runtimeAnimatorController = animatorControllers[GameManager.instance.playerId];
-        // 애니메이터 컨트롤러를 현재 선택된 playerId에 맞는 걸로 바꿈
+        animator.runtimeAnimatorController = animatorControllers[PlayerInformManager.instance.playerId];
     }
 }

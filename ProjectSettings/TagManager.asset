@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Fire
+  - Enemy
+  - Wall
+  - Magnet
   layers:
   - Default
   - TransparentFX
@@ -12,8 +16,8 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
-  - 
+  - fire
+  - monster
   - 
   - 
   - 

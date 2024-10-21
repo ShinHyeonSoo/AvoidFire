@@ -1,21 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    // 점수판을 만들자
-    // 점수판이 있어야 할 곳 : 인 게임 씬, 점수 씬
+    public static Score Instance;
+    public Text totalScoreTxt;
+    public RankingManager rankingManager;
+    public int totalScore;
 
-    // Start is called before the first frame update
-    void Start()
+    public void AddScore(int score)
     {
-        
+        if (GameManager.Instance.IsGameOver == false)
+        {
+            totalScore += score;
+        }
+        totalScoreTxt.text = totalScore.ToString();
     }
-
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void CallUpdateScores()
+    {
+        string playerName = PlayerInformManager.instance.playerName;
+        if (playerName == null)
+        {
+            playerName = "이름없음";
+        }
+        rankingManager.AddNewScore(playerName, totalScore);
+        ScoreManager.Instance.UpdateScores(totalScore);
     }
 }

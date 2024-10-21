@@ -3,7 +3,9 @@
 public enum SceneNames
 {
     Title = 0,
+    CharacterSelect,
     Game,
+    Max
 }
 
 public static class SceneManagement
