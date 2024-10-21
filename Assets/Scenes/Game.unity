@@ -15771,6 +15771,9 @@ MonoBehaviour:
   - tag: super
     prefab: {fileID: 3280519133390621005, guid: 08ea7d284cd5572449defd77e08c5334, type: 3}
     size: 3
+  - tag: hit
+    prefab: {fileID: 4021103657954561961, guid: a23cd063c7b37b3468f9e843b88b5255, type: 3}
+    size: 5
 --- !u!199 &4984802755491625695
 ParticleSystemRenderer:
   serializedVersion: 6
